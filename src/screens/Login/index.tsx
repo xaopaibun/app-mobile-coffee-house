@@ -19,9 +19,11 @@ const LoginScreen: React.FC<Props> = ({navigation}) => {
   const handleOnSubmit = useCallback(
     async (values: LoginRequest) => {
       setLoading(true);
-      await dispatch(login(values));
-      setLoading(false);
-      navigation.navigate('Home');
+      const actionResult = await dispatch(login(values));
+      if (login.fulfilled.match(actionResult)) {
+        setLoading(false);
+        navigation.navigate('Home');
+      }
     },
     [dispatch, navigation],
   );

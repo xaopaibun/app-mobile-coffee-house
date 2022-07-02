@@ -7,6 +7,4 @@ export interface LoginResponse {
   auth_token: string;
 }
 
-export interface LoginResponseError {
-  errors: string[];
-}
+export interface ResponseError {}
