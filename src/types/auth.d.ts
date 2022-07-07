@@ -8,3 +8,10 @@ export interface LoginResponse {
 }
 
 export interface ResponseError {}
+
+export interface SignUpRequest {
+  email: string;
+  name: string;
+  password: string;
+  confirm_password: string;
+}

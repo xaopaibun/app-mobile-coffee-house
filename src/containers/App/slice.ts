@@ -16,12 +16,18 @@ const initialState: InitialStateProps = {
 const AppSlice = createSlice({
   name: 'app',
   initialState,
-  reducers: {},
+  reducers: {
+    logout: (state) => {
+      state.auth.isLogin = false;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(login.fulfilled, (state) => {
       state.auth.isLogin = true;
     });
   },
 });
+
+export const {logout} = AppSlice.actions;
 
 export default AppSlice.reducer;
