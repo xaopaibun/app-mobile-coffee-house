@@ -4,15 +4,16 @@ import {fontSizes} from 'assets';
 type Props = {
   container: ViewStyle;
   containerView: ViewStyle;
-  title: TextStyle;
   subTitle: TextStyle;
   borderLogin: ViewStyle;
   flex: ViewStyle;
   content: ViewStyle;
   label: TextStyle;
-  labelForgot: TextStyle;
+  labelSignIn: TextStyle;
   submit: ViewStyle;
   input: ViewStyle;
+  labelAlready: TextStyle;
+  flexText: ViewStyle;
 };
 
 export default StyleSheet.create<Props>({
@@ -24,12 +25,6 @@ export default StyleSheet.create<Props>({
   containerView: {
     flex: 1,
     padding: 15,
-  },
-  title: {
-    fontSize: fontSizes.custom(24),
-    color: '#909090',
-    fontWeight: '400',
-    marginLeft: 15,
   },
   subTitle: {
     fontSize: fontSizes.custom(24),
@@ -49,11 +44,11 @@ export default StyleSheet.create<Props>({
     marginVertical: 30,
   },
   content: {
-    height: 437,
+    height: 'auto',
     backgroundColor: '#FFFFFF',
     borderRadius: 8,
     padding: 15,
-    marginTop: 50,
+    marginTop: 30,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -69,11 +64,15 @@ export default StyleSheet.create<Props>({
     marginVertical: 10,
     color: '#909090',
   },
-  labelForgot: {
-    fontSize: 18,
+  labelSignIn: {
+    fontWeight: '700',
+    color: '#303030',
+  },
+  labelAlready: {
+    fontSize: 14,
     fontWeight: '600',
     textAlign: 'center',
-    color: '#303030',
+    color: '#808080',
   },
   submit: {
     backgroundColor: '#242424',
@@ -90,5 +89,9 @@ export default StyleSheet.create<Props>({
   input: {
     borderWidth: 0,
     borderBottomWidth: 1,
+  },
+  flexText: {
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
 });

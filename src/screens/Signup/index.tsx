@@ -5,14 +5,14 @@ import {useDispatch} from 'react-redux';
 import {StackScreenProps} from '@react-navigation/stack';
 import {images} from 'assets';
 import {Input, Button} from 'components';
-import {LoginRequest, StackParams, AppDispatch} from 'types';
+import {LoginRequest, StackParams, AppDispatch, SignUpRequest} from 'types';
 import styles from './styles';
 import {login} from './thunk';
 import validationSchema from './validationSchema';
 
-type Props = StackScreenProps<StackParams, 'Login'>;
+type Props = StackScreenProps<StackParams, 'SignUp'>;
 
-const LoginScreen: React.FC<Props> = ({navigation}) => {
+const SignupScreen: React.FC<Props> = ({navigation}) => {
   const dispatch = useDispatch<AppDispatch>();
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -28,10 +28,9 @@ const LoginScreen: React.FC<Props> = ({navigation}) => {
     [dispatch, navigation],
   );
 
-  const handleSignUp = useCallback(
-    () => navigation.navigate('SignUp'),
-    [navigation],
-  );
+  const handleOnSignIn = useCallback(() => {
+    navigation.navigate('Login');
+  }, [navigation]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -41,37 +40,39 @@ const LoginScreen: React.FC<Props> = ({navigation}) => {
           <Image source={images.icon_login} />
           <View style={styles.borderLogin} />
         </View>
-        <Text style={styles.title}>Hello !</Text>
-        <Text style={styles.subTitle}>WELCOME BACK</Text>
+        <Text style={styles.subTitle}>WELCOME</Text>
         <Formik
           onSubmit={handleOnSubmit}
           initialValues={initialValues}
           validationSchema={validationSchema}>
           {({handleSubmit}) => (
             <View style={styles.content}>
+              <Text style={styles.label}>Name</Text>
+              <Input name="name" style={styles.input} />
               <Text style={styles.label}>Email</Text>
-              <Input name="email" testID="inputEmail" style={styles.input} />
+              <Input name="email" style={styles.input} />
               <Text style={styles.label}>Password</Text>
+              <Input name="password" secureTextEntry style={styles.input} />
+              <Text style={styles.label}>Confirm Password</Text>
               <Input
-                name="password"
+                name="confirm_password"
                 secureTextEntry
-                testID="inputPassword"
                 style={styles.input}
               />
-              <TouchableOpacity>
-                <Text style={styles.labelForgot}>Forgot Password</Text>
-              </TouchableOpacity>
               <Button
-                label="Log in"
+                label="SIGN UP"
                 onPress={handleSubmit}
                 isLoading={loading}
                 disabled={loading}
                 containerStyle={styles.submit}
                 testID="btnSubmit"
               />
-              <TouchableOpacity onPress={handleSignUp}>
-                <Text style={styles.labelForgot}>SIGN UP</Text>
-              </TouchableOpacity>
+              <View style={styles.flexText}>
+                <Text style={styles.labelAlready}>Already have account? </Text>
+                <TouchableOpacity onPress={handleOnSignIn}>
+                  <Text style={styles.labelSignIn}>SIGN IN</Text>
+                </TouchableOpacity>
+              </View>
             </View>
           )}
         </Formik>
@@ -80,9 +81,11 @@ const LoginScreen: React.FC<Props> = ({navigation}) => {
   );
 };
 
-const initialValues: LoginRequest = {
+const initialValues: SignUpRequest = {
   email: '',
+  name: '',
   password: '',
+  confirm_password: '',
 };
 
-export default LoginScreen;
+export default SignupScreen;

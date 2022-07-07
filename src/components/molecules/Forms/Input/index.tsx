@@ -32,13 +32,8 @@ const Input: React.FC<Props> = ({
   multiline,
   ...props
 }) => {
-  const {
-    values,
-    handleBlur,
-    errors,
-    touched,
-    setFieldValue,
-  } = useFormikContext<FormikProps>();
+  const {values, handleBlur, errors, touched, setFieldValue} =
+    useFormikContext<FormikProps>();
 
   const hasError = useMemo(() => {
     return errors[name] && touched[name];
