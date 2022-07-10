@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {login} from 'screens/Login/thunk';
+import {login} from 'screens/Authen/Login/thunk';
 
 type InitialStateProps = {
   auth: {

@@ -47,12 +47,14 @@ const data = [
   },
 ];
 
-const HomeScreen: React.FC<Props> = () => {
+const HomeScreen: React.FC<Props> = ({navigation}) => {
   const dispatch = useDispatch();
 
-  const handleLogout = () => {
-    dispatch(logout());
-  };
+  const handleLogout = () => dispatch(logout());
+
+  const handleOnCart = () => navigation.navigate('CartScreen');
+
+  const handleOnDetail = () => navigation.navigate('ProductScreen');
 
   return (
     <SafeAreaView style={styles.container}>
@@ -65,7 +67,7 @@ const HomeScreen: React.FC<Props> = () => {
             <Text style={styles.title}>Make home</Text>
             <Text style={styles.subTitle}>BEAUTIFUL</Text>
           </View>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={handleOnCart}>
             <Image source={images.cart} />
           </TouchableOpacity>
         </View>
@@ -107,7 +109,9 @@ const HomeScreen: React.FC<Props> = () => {
           data={data}
           numColumns={2}
           renderItem={({item}) => (
-            <View style={styles.itemProduct}>
+            <TouchableOpacity
+              style={styles.itemProduct}
+              onPress={handleOnDetail}>
               <View style={styles.imageView}>
                 <Image source={{uri: item.image}} style={styles.imageProduct} />
                 <TouchableOpacity style={styles.shopping}>
@@ -119,7 +123,7 @@ const HomeScreen: React.FC<Props> = () => {
               </View>
               <Text style={styles.name}>{item.name}</Text>
               <Text style={styles.price}>{item.price}</Text>
-            </View>
+            </TouchableOpacity>
           )}
           keyExtractor={({id}) => id.toString()}
         />
