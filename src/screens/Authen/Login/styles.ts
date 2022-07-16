@@ -10,7 +10,7 @@ type Props = {
   flex: ViewStyle;
   content: ViewStyle;
   label: TextStyle;
-  labelForgot: TextStyle;
+  labelBtn: TextStyle;
   submit: ViewStyle;
   input: ViewStyle;
 };
@@ -49,7 +49,7 @@ export default StyleSheet.create<Props>({
     marginVertical: 30,
   },
   content: {
-    height: 437,
+    height: 'auto',
     backgroundColor: '#FFFFFF',
     borderRadius: 8,
     padding: 15,
@@ -69,15 +69,16 @@ export default StyleSheet.create<Props>({
     marginVertical: 10,
     color: '#909090',
   },
-  labelForgot: {
+  labelBtn: {
     fontSize: 18,
     fontWeight: '600',
     textAlign: 'center',
     color: '#303030',
+    marginVertical: 10,
   },
   submit: {
     backgroundColor: '#242424',
-    marginVertical: 30,
+    marginVertical: 10,
     shadowColor: '#242424',
     shadowOffset: {
       width: 2,

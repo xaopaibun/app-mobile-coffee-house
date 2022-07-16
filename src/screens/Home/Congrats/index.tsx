@@ -8,7 +8,10 @@ import styles from './styles';
 type Props = StackScreenProps<StackParams, 'Congrats'>;
 
 const CongratsScreen: React.FC<Props> = ({navigation}) => {
-  const handleGoOrders = () => navigation.navigate('Home');
+  const handleGoHome = () => navigation.navigate('Home');
+
+  const handleGoOrders = () => navigation.navigate('MyOrderScreen');
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.containerView}>
@@ -23,7 +26,7 @@ const CongratsScreen: React.FC<Props> = ({navigation}) => {
             onPress={handleGoOrders}>
             <Text style={styles.text_btn}>Track your orders</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.btn_outline} onPress={handleGoOrders}>
+          <TouchableOpacity style={styles.btn_outline} onPress={handleGoHome}>
             <Text style={styles.text_outline}>BACK TO HOME</Text>
           </TouchableOpacity>
         </View>
