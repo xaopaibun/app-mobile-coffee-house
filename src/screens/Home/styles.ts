@@ -25,6 +25,10 @@ type Props = {
   imageView: ViewStyle;
   textLabel: TextStyle;
   containerView: ViewStyle;
+  btnOutline: ViewStyle;
+  textBtnOutline: TextStyle;
+  btn: ViewStyle;
+  textBtn: TextStyle;
 };
 
 export default StyleSheet.create<Props>({
@@ -57,7 +61,8 @@ export default StyleSheet.create<Props>({
     width: 24,
   },
   viewSelect: {
-    height: 80,
+    height: 'auto',
+    marginVertical: 16,
   },
   selected: {
     height: 44,
@@ -84,7 +89,7 @@ export default StyleSheet.create<Props>({
   },
   imageProduct: {
     width: '100%',
-    height: 250,
+    height: 230,
     borderRadius: 10,
   },
   iconShopping: {
@@ -94,7 +99,7 @@ export default StyleSheet.create<Props>({
   name: {
     fontSize: 14,
     color: '#606060',
-    marginVertical: 12,
+    marginVertical: 8,
   },
   price: {
     fontSize: 14,
@@ -115,11 +120,44 @@ export default StyleSheet.create<Props>({
     justifyContent: 'center',
   },
   imageView: {
+    backgroundColor: '#ffffff',
+    borderRadius: 16,
     position: 'relative',
     width: 'auto',
   },
   textLabel: {
     fontSize: 14,
     color: '#999999',
+  },
+  btnOutline: {
+    backgroundColor: '#FFFFFF',
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    borderWidth: 1,
+    borderRadius: 8,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: 10,
+  },
+  textBtnOutline: {
+    color: '#303030',
+    fontSize: 14,
+    fontWeight: '600',
+  },
+  btn: {
+    backgroundColor: '#242424',
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    borderRadius: 8,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: 10,
+  },
+  textBtn: {
+    color: '#FFFFFF',
+    fontSize: 14,
+    fontWeight: '600',
   },
 });

@@ -10,6 +10,7 @@ export const login = createAsyncThunk<
 >('login/login', async (params, {rejectWithValue}) => {
   try {
     const {data} = await authService.login(params);
+    console.log('data', data);
     await setToken(data.auth_token);
     return data;
   } catch (err) {
