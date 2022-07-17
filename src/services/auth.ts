@@ -1,5 +1,5 @@
 import {AxiosInstance, AxiosPromise} from 'axios';
-import {LoginRequest, LoginResponse} from 'types';
+import {LoginRequest, LoginResponse, SignUpRequest} from 'types';
 
 class Auth {
   private readonly axios: AxiosInstance;
@@ -10,10 +10,17 @@ class Auth {
   login(data: LoginRequest): AxiosPromise<LoginResponse> {
     return this.axios({
       method: 'POST',
-      url: '/sign_in',
+      url: '/auth/login',
+      data,
+    });
+  }
+
+  signup(data: SignUpRequest): AxiosPromise<LoginResponse> {
+    return this.axios({
+      method: 'POST',
+      url: '/auth/signup',
       data,
     });
   }
 }
-
 export default Auth;

@@ -76,6 +76,7 @@ export default StyleSheet.create<Props>({
   image_product: {
     height: '100%',
     width: '85%',
+    backgroundColor: '#F5F5F5',
     borderBottomLeftRadius: 60,
   },
   name: {
