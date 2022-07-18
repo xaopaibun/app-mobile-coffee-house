@@ -59,7 +59,7 @@ const LoginScreen: React.FC<Props> = ({navigation}) => {
                 style={styles.input}
               />
               <TouchableOpacity>
-                <Text style={styles.labelForgot}>Forgot Password</Text>
+                <Text style={styles.labelBtn}>Forgot Password</Text>
               </TouchableOpacity>
               <Button
                 label="Log in"
@@ -70,8 +70,14 @@ const LoginScreen: React.FC<Props> = ({navigation}) => {
                 testID="btnSubmit"
               />
               <TouchableOpacity onPress={handleSignUp}>
-                <Text style={styles.labelForgot}>SIGN UP</Text>
+                <Text style={styles.labelBtn}>SIGN UP</Text>
               </TouchableOpacity>
+              {/* <TouchableOpacity onPress={handleSignUp}>
+                <Text style={styles.labelBtn}>Login Faceboook</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={handleSignUp}>
+                <Text style={styles.labelBtn}>Login google</Text>
+              </TouchableOpacity> */}
             </View>
           )}
         </Formik>
@@ -81,8 +87,8 @@ const LoginScreen: React.FC<Props> = ({navigation}) => {
 };
 
 const initialValues: LoginRequest = {
-  email: '',
-  password: '',
+  email: 'quypv@reactplus.jp',
+  password: 'a12345678',
 };
 
 export default LoginScreen;

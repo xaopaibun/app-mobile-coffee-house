@@ -7,15 +7,22 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
 import {StackScreenProps} from '@react-navigation/stack';
 import {images} from 'assets';
+import {resetCart} from 'containers/App/slice';
 import {StackParams} from 'types';
+import {homeSelectors} from '../selector';
 import styles from './styles';
 
 type Props = StackScreenProps<StackParams, 'Home'>;
 
 const CheckOutScreen: React.FC<Props> = ({navigation}) => {
   const goBack = () => navigation.goBack();
+
+  const {money} = useSelector(homeSelectors);
+
+  const dispatch = useDispatch();
 
   return (
     <SafeAreaView style={styles.container}>
@@ -39,11 +46,12 @@ const CheckOutScreen: React.FC<Props> = ({navigation}) => {
             </View>
             <View style={styles.card}>
               <View style={styles.header_card}>
-                <Text style={styles.title}>Bruno Fernandes</Text>
+                <Text style={styles.title}>Phạm Văn Quý</Text>
               </View>
               <View style={styles.body_card}>
+                <Text style={styles.address}>Phone: 0352343938</Text>
                 <Text style={styles.address}>
-                  25 rue Robert Latouche, Nice, 06200, Côte D’azur, France
+                  Address: 235 Hoàng Quốc Việt, Quận Bắc Từ Liêm, TP Hà Nội
                 </Text>
               </View>
             </View>
@@ -84,22 +92,30 @@ const CheckOutScreen: React.FC<Props> = ({navigation}) => {
           <View style={styles.body_card}>
             <View style={styles.flex}>
               <Text style={styles.label}> Order: </Text>
-              <Text style={styles.price}>$ 95.00</Text>
+              <Text style={styles.price}>
+                {' '}
+                {Intl.NumberFormat().format(money)}
+              </Text>
             </View>
             <View style={styles.flex}>
               <Text style={styles.label}> Delivery:</Text>
-              <Text style={styles.price}>$ 5.00</Text>
+              <Text style={styles.price}>30,000</Text>
             </View>
             <View style={styles.flex}>
               <Text style={styles.label}> Total:</Text>
-              <Text style={{...styles.price, fontWeight: '700'}}>$ 100.00</Text>
+              <Text style={{...styles.price, fontWeight: '700'}}>
+                {Intl.NumberFormat().format(money + 30000)}
+              </Text>
             </View>
           </View>
         </View>
       </ScrollView>
       <TouchableOpacity
         style={styles.btn}
-        onPress={() => navigation.navigate('Congrats')}>
+        onPress={() => {
+          dispatch(resetCart());
+          navigation.navigate('Congrats');
+        }}>
         <Text style={styles.textBtn}>SUBMIT ORDER</Text>
       </TouchableOpacity>
     </SafeAreaView>
