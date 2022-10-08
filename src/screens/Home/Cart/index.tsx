@@ -59,32 +59,33 @@ const CartScreen: React.FC<Props> = ({navigation}) => {
                 <Image source={{uri: item.image}} style={styles.imageProduct} />
               </View>
               <View style={styles.info}>
-                <Text style={styles.name}>{item.title}</Text>
+                <Text style={styles.name}>{item.name}</Text>
                 <Text style={styles.price}>
                   {Intl.NumberFormat().format(item.price)}
                 </Text>
                 <View style={styles.flex}>
                   <TouchableOpacity
                     style={styles.btn_augment}
-                    onPress={() => handleIncrease(item.id)}>
+                    onPress={() => handleIncrease(item._id)}>
                     <Image source={images.add} />
                   </TouchableOpacity>
                   <Text style={styles.number}>{item.quatity}</Text>
                   <TouchableOpacity
                     style={styles.btn_augment}
-                    onPress={() => handleDecrement(item.id)}>
+                    onPress={() => handleDecrement(item._id)}>
                     <Image source={images.reduce} />
                   </TouchableOpacity>
                 </View>
               </View>
               <View style={styles.func}>
-                <TouchableOpacity onPress={() => handleDeleteCartByID(item.id)}>
+                <TouchableOpacity
+                  onPress={() => handleDeleteCartByID(item._id)}>
                   <Image source={images.delete} />
                 </TouchableOpacity>
               </View>
             </View>
           )}
-          keyExtractor={({id}) => id.toString()}
+          keyExtractor={(item) => item._id.toString()}
         />
       </ScrollView>
       <View style={[styles.flex_total, styles.promo]}>

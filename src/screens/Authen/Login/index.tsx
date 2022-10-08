@@ -1,11 +1,12 @@
 import {Formik} from 'formik';
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {Image, View, Text, SafeAreaView, TouchableOpacity} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {StackScreenProps} from '@react-navigation/stack';
 import {images} from 'assets';
 import {Input, Button} from 'components';
 import {LoginRequest, StackParams, AppDispatch} from 'types';
+import {axios} from 'utils';
 import styles from './styles';
 import {login} from './thunk';
 import validationSchema from './validationSchema';
@@ -38,7 +39,7 @@ const LoginScreen: React.FC<Props> = ({navigation}) => {
       <View style={styles.containerView}>
         <View style={styles.flex}>
           <View style={styles.borderLogin} />
-          <Image source={images.icon_login} />
+          {/* <Image source={images.logo_coffee} height={50} width={50} /> */}
           <View style={styles.borderLogin} />
         </View>
         <Text style={styles.title}>Hello !</Text>
@@ -87,7 +88,7 @@ const LoginScreen: React.FC<Props> = ({navigation}) => {
 };
 
 const initialValues: LoginRequest = {
-  email: 'Xaopaibun@gmail.com',
+  email: 'vanquy33338888@gmail.com',
   password: 'a12345678',
 };
 

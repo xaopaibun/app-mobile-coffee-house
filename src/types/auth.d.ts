@@ -11,7 +11,15 @@ export interface SignUpRequest {
 }
 
 export interface LoginResponse {
-  auth_token: string;
+  tokens: {
+    access: {
+      token: string;
+    };
+  };
+  user: {
+    email: string;
+    name: string;
+  };
 }
 
 export interface ResponseError {}

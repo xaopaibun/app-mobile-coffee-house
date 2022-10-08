@@ -44,6 +44,7 @@ export const images = {
   payment_card: require('./images/payment_card.png'),
   visa: require('./images/visa.png'),
   mastercard: require('./images/mastercard.png'),
+  logo_coffee: require('./images/logo_coffee.jpeg'),
 };
 
 export const colors = {

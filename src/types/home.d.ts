@@ -1,27 +1,32 @@
 export interface ProductItem {
-  id: number;
-  title: string;
+  _id: number;
+  name: string;
   price: number;
-  description: string;
+  content: string;
   category: string;
   image: string;
-  rating: {
-    rate: number;
-    count: number;
-  };
+  star: number;
   favorites?: boolean;
+  shipping: boolean;
+  category_id: string;
 }
 
 export interface CartItem {
-  id: number;
-  title: string;
+  _id: number;
+  name: string;
   price: number;
   image: string;
   quatity: number;
 }
 
+export interface BaseResponse<T> {
+  results: Array<T>;
+  page: number;
+  limit: number;
+  totalPages: number;
+  totalResults: number;
+}
 export interface CategoryType {
-  id: number;
-  label: string;
-  name: string;
+  category_name: string;
+  _id: number;
 }

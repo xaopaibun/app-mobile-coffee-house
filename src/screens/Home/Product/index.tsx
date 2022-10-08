@@ -28,9 +28,9 @@ const ProductScreen: React.FC<Props> = ({navigation}) => {
   const handleAddCart = (product: ProductItem) => {
     dispatch(
       addCart({
-        id: product.id,
+        _id: product._id,
         quatity,
-        title: product.title,
+        name: product.name,
         price: product.price,
         image: product.image,
       }),
@@ -62,7 +62,7 @@ const ProductScreen: React.FC<Props> = ({navigation}) => {
         <ScrollView
           style={styles.content_top}
           showsVerticalScrollIndicator={false}>
-          <Text style={styles.name}>{productDetail.title}</Text>
+          <Text style={styles.name}>{productDetail.name}</Text>
           <View style={styles.wrap_price_quatity}>
             <Text style={styles.price}>
               {Intl.NumberFormat().format(productDetail.price)} VND
@@ -86,17 +86,15 @@ const ProductScreen: React.FC<Props> = ({navigation}) => {
           </View>
           <View style={styles.wrap_star}>
             <Image source={images.star} />
-            <Text style={styles.number_star}>{productDetail.rating.rate}</Text>
-            <Text style={styles.label_review}>
-              ({productDetail.rating.count} reviews)
-            </Text>
+            <Text style={styles.number_star}>{productDetail.star}</Text>
+            <Text style={styles.label_review}>20 reviews</Text>
           </View>
-          <Text style={styles.content}>{productDetail.description}</Text>
+          <Text style={styles.content}>{productDetail.content}</Text>
         </ScrollView>
         <View style={styles.wrap_btn}>
           <TouchableOpacity
             style={styles.btn_favorites}
-            onPress={() => handleFavoriter(productDetail.id)}>
+            onPress={() => handleFavoriter(productDetail._id)}>
             <Image source={!isLove ? images.marker : images.marker_active} />
           </TouchableOpacity>
           <TouchableOpacity

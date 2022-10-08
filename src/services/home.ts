@@ -10,21 +10,21 @@ class Home {
   getData(): AxiosPromise<Array<ProductItem>> {
     return this.axios({
       method: 'GET',
-      url: '/products',
+      url: '/product/list-products',
     });
   }
 
   getDataCategory(): AxiosPromise<Array<CategoryType>> {
     return this.axios({
       method: 'GET',
-      url: '/categorys',
+      url: '/category/getdata',
     });
   }
 
-  getProductByCategory(category: string): AxiosPromise<Array<ProductItem>> {
+  getProductByCategory(_category: string): AxiosPromise<Array<ProductItem>> {
     return this.axios({
       method: 'GET',
-      url: `/categorys/${category}`,
+      url: `/product/list-products`,
     });
   }
 }

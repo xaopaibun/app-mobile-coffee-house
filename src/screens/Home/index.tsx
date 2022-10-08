@@ -55,26 +55,29 @@ const HomeScreen: React.FC<Props> = ({navigation}) => {
         </View>
         <View style={styles.viewSelect}>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            {category.map((value, index) => (
-              <TouchableOpacity
-                style={idTab === value.id ? styles.btn : styles.btnOutline}
-                key={index}
-                onPress={() => {
-                  setIDTab(value.id);
-                  if (value.name === 'tat-ca') {
-                    dispatch(getDataProduct());
-                  } else {
-                    dispatch(getProductByCategory(value.name));
-                  }
-                }}>
-                <Text
-                  style={
-                    idTab === value.id ? styles.textBtn : styles.textBtnOutline
-                  }>
-                  {value.label}
-                </Text>
-              </TouchableOpacity>
-            ))}
+            {category &&
+              category?.map((value, index) => (
+                <TouchableOpacity
+                  style={idTab === value._id ? styles.btn : styles.btnOutline}
+                  key={index}
+                  onPress={() => {
+                    setIDTab(value._id);
+                    // if (value.name === 'tat-ca') {
+                    //   dispatch(getDataProduct());
+                    // } else {
+                    //   dispatch(getProductByCategory(value.name));
+                    // }
+                  }}>
+                  <Text
+                    style={
+                      idTab === value._id
+                        ? styles.textBtn
+                        : styles.textBtnOutline
+                    }>
+                    {value.category_name}
+                  </Text>
+                </TouchableOpacity>
+              ))}
           </ScrollView>
         </View>
         {loading ? (
@@ -99,13 +102,13 @@ const HomeScreen: React.FC<Props> = ({navigation}) => {
                     />
                   </TouchableOpacity>
                 </View>
-                <Text style={styles.name}>{item.title}</Text>
+                <Text style={styles.name}>{item.name}</Text>
                 <Text style={styles.price}>
                   {Intl.NumberFormat().format(item.price)} VND
                 </Text>
               </TouchableOpacity>
             )}
-            keyExtractor={({id}) => id.toString()}
+            keyExtractor={(item) => item._id.toString()}
           />
         )}
       </ScrollView>

@@ -13,6 +13,7 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		793C3FB5EEF367ACCC69E65C /* libPods-RNCodeSample-RNCodeSampleTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 53192068E0E5934D996CB33D /* libPods-RNCodeSample-RNCodeSampleTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		8A431E59E8CA8CB3DD3C30ED /* libPods-RNCodeSample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F6A85766D6FB94D34B9A413 /* libPods-RNCodeSample.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A431E59E8CA8CB3DD3C30ED /* libPods-RNCodeSample.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

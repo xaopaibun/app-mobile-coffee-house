@@ -51,7 +51,7 @@ const AppSlice = createSlice({
     },
     addCart: (state, action: PayloadAction<CartItem>) => {
       const cart = state.home.cart;
-      const index = cart.findIndex(({id}) => action.payload.id === id);
+      const index = cart.findIndex(({_id}) => action.payload._id === _id);
       if (index < 0) {
         cart.push(action.payload);
       } else {
@@ -65,7 +65,7 @@ const AppSlice = createSlice({
     },
     removeCartByID: (state, action: PayloadAction<number>) => {
       const cart = state.home.cart;
-      state.home.cart = cart.filter((item) => item.id !== action.payload);
+      state.home.cart = cart.filter((item) => item._id !== action.payload);
       state.home.money = state.home.cart.reduce(
         (total, currentValue) =>
           total + currentValue.price * currentValue.quatity,
@@ -74,7 +74,7 @@ const AppSlice = createSlice({
     },
     favoritesProductByID: (state, action: PayloadAction<number>) => {
       const products = state.home.products;
-      const index = products.findIndex(({id}) => action.payload === id);
+      const index = products.findIndex(({_id}) => action.payload === _id);
       if (index >= 0) {
         products[index].favorites = true;
       }
@@ -82,7 +82,7 @@ const AppSlice = createSlice({
     },
     removeFavoriteProductByID: (state, action: PayloadAction<number>) => {
       const products = state.home.products;
-      const index = products.findIndex(({id}) => action.payload === id);
+      const index = products.findIndex(({_id}) => action.payload === _id);
       if (index >= 0) {
         products[index].favorites = false;
       }
@@ -90,7 +90,7 @@ const AppSlice = createSlice({
     },
     increaseCartByID: (state, action: PayloadAction<number>) => {
       const cart = state.home.cart;
-      const index = cart.findIndex(({id}) => action.payload === id);
+      const index = cart.findIndex(({_id}) => action.payload === _id);
       if (index >= 0) {
         cart[index].quatity = cart[index].quatity + 1;
       }
@@ -103,7 +103,7 @@ const AppSlice = createSlice({
     },
     decrementCartByID: (state, action: PayloadAction<number>) => {
       const cart = state.home.cart;
-      const index = cart.findIndex(({id}) => action.payload === id);
+      const index = cart.findIndex(({_id}) => action.payload === _id);
       if (index >= 0) {
         cart[index].quatity = cart[index].quatity - 1;
       }
@@ -137,7 +137,8 @@ const AppSlice = createSlice({
       console.log(action.payload);
     });
     builder.addCase(getDataProduct.fulfilled, (state, action) => {
-      state.home.products = action.payload.map((product) => ({
+      const {results} = action.payload;
+      state.home.products = results.map((product: any) => ({
         ...product,
         favorites: false,
       }));
@@ -145,14 +146,15 @@ const AppSlice = createSlice({
     });
 
     builder.addCase(getProductByCategory.fulfilled, (state, action) => {
-      state.home.products = action.payload.map((product) => ({
+      const {results} = action.payload;
+      state.home.products = results.map((product) => ({
         ...product,
         favorites: false,
       }));
       state.home.loading = false;
     });
     builder.addCase(getDataCategory.fulfilled, (state, action) => {
-      state.home.category = action.payload;
+      state.home.category = action.payload.results;
       state.home.loading = false;
     });
 
