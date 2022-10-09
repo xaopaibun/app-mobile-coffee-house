@@ -1,0 +1,135 @@
+{
+  "name": "coffee-house-admin",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.8.6",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^12.1.5",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.5.2",
+    "@types/node": "^16.11.64",
+    "@types/react": "^17.0.50",
+    "@types/react-dom": "^17.0.17",
+    "@types/styled-components": "^5.1.26",
+    "axios": "^0.21.4",
+    "lodash": "^4.17.21",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-redux": "^7.2.9",
+    "react-router-dom": "^6.4.2",
+    "react-scripts": "^5.0.0",
+    "styled-components": "^5.3.6",
+    "typescript": "^4.8.4",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "type": "tsc --noEmit",
+    "gen:c": "npx hygen generator component",
+    "gen:ct": "npx hygen generator container",
+    "gen:p": "npx hygen generator page",
+    "gen:s": "npx hygen generator service",
+    "storybook": "start-storybook -p 6006 -s public",
+    "build-storybook": "build-storybook -s public"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest",
+      "plugin:prettier/recommended",
+      "prettier"
+    ],
+    "plugins": [
+      "react-hooks",
+      "prettier"
+    ],
+    "rules": {
+      "prettier/prettier": [
+        "error",
+        {
+          "trailingComma": "es5",
+          "tabWidth": 2,
+          "semi": true,
+          "singleQuote": true,
+          "printWidth": 100
+        }
+      ],
+      "arrow-body-style": "off",
+      "prefer-arrow-callback": "off",
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn",
+      "import/order": "error",
+      "@typescript-eslint/no-explicit-any": "error",
+      "no-unused-vars": "error"
+    },
+    "overrides": [
+      {
+        "files": [
+          "**/*.stories.*"
+        ],
+        "rules": {
+          "import/no-anonymous-default-export": "off"
+        }
+      }
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "prettier": {
+    "trailingComma": "es5",
+    "tabWidth": 2,
+    "semi": true,
+    "singleQuote": true,
+    "printWidth": 100
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --write"
+    ]
+  },
+  "devDependencies": {
+    "@storybook/addon-actions": "^6.5.12",
+    "@storybook/addon-essentials": "^6.5.12",
+    "@storybook/addon-links": "^6.5.12",
+    "@storybook/addon-viewport": "^6.5.12",
+    "@storybook/builder-webpack5": "^6.5.12",
+    "@storybook/manager-webpack5": "^6.5.12",
+    "@storybook/node-logger": "^6.5.12",
+    "@storybook/preset-create-react-app": "^4.1.2",
+    "@storybook/react": "^6.5.12",
+    "@types/lodash": "^4.14.186",
+    "@types/redux-mock-store": "^1.0.3",
+    "axios-mock-adapter": "^1.21.2",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "husky": "^7.0.4",
+    "hygen": "^6.2.11",
+    "lint-staged": "^11.2.6",
+    "prettier": "^2.7.1",
+    "redux-mock-store": "^1.5.4",
+    "storybook-addon-mock": "^2.4.1",
+    "storybook-builder-vite": "^0.1.23",
+    "vite": "^2.9.15",
+    "vite-tsconfig-paths": "^3.5.1"
+  }
+}
