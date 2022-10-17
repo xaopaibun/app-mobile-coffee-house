@@ -6,10 +6,12 @@ import {
   getDataProduct,
   getProductByCategory,
 } from 'screens/Home/thunk';
+import {User} from 'types';
 
 type InitialStateProps = {
   auth: {
     isLogin: boolean;
+    user: User;
   };
   home: {
     loading: boolean;
@@ -24,6 +26,7 @@ type InitialStateProps = {
 const initialState: InitialStateProps = {
   auth: {
     isLogin: false,
+    user: {} as User,
   },
   home: {
     loading: false,
@@ -119,9 +122,6 @@ const AppSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(login.pending, () => {
-      console.log('pending');
-    });
     builder.addCase(getDataProduct.pending, (state) => {
       state.home.loading = true;
     });
@@ -134,11 +134,11 @@ const AppSlice = createSlice({
 
     builder.addCase(login.fulfilled, (state, action) => {
       state.auth.isLogin = true;
-      console.log(action.payload);
+      state.auth.user = action.payload.user;
     });
     builder.addCase(getDataProduct.fulfilled, (state, action) => {
       const {results} = action.payload;
-      state.home.products = results.map((product: any) => ({
+      state.home.products = results.map((product) => ({
         ...product,
         favorites: false,
       }));

@@ -1,15 +1,20 @@
-import {BaseResponse, CategoryType, ProductItem} from 'src/types/home';
+import {
+  BaseResponse,
+  CategoryType,
+  ProductItem,
+  RequestBaseParams,
+} from 'src/types/home';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {homeService} from 'services';
 import * as TYPE from 'types';
 
 export const getDataProduct = createAsyncThunk<
   BaseResponse<ProductItem>,
-  undefined,
+  RequestBaseParams,
   TYPE.ThunkAPI<TYPE.ResponseError>
->('product/thunk/list-product', async ({rejectWithValue}: any) => {
+>('product/thunk/list-products', async (params, {rejectWithValue}) => {
   try {
-    const {data} = await homeService.getData();
+    const {data} = await homeService.getData(params);
     return data;
   } catch (err) {
     return rejectWithValue(err);
@@ -18,11 +23,11 @@ export const getDataProduct = createAsyncThunk<
 
 export const getDataCategory = createAsyncThunk<
   BaseResponse<CategoryType>,
-  undefined,
+  RequestBaseParams,
   TYPE.ThunkAPI<TYPE.ResponseError>
->('product/thunk/category', async (_params, {rejectWithValue}: any) => {
+>('product/thunk/category', async (params, {rejectWithValue}) => {
   try {
-    const {data} = await homeService.getDataCategory();
+    const {data} = await homeService.getDataCategory(params);
     return data;
   } catch (err) {
     return rejectWithValue(err);
@@ -31,16 +36,13 @@ export const getDataCategory = createAsyncThunk<
 
 export const getProductByCategory = createAsyncThunk<
   BaseResponse<ProductItem>,
-  string,
+  RequestBaseParams,
   TYPE.ThunkAPI<TYPE.ResponseError>
->(
-  'product/thunk/list-product-category',
-  async (req, {rejectWithValue}: any) => {
-    try {
-      const {data} = await homeService.getProductByCategory(req);
-      return data;
-    } catch (err) {
-      return rejectWithValue(err);
-    }
-  },
-);
+>('product/thunk/list-product-category', async (params, {rejectWithValue}) => {
+  try {
+    const {data} = await homeService.getProductByCategory(params);
+    return data;
+  } catch (err) {
+    return rejectWithValue(err);
+  }
+});

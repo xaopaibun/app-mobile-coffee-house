@@ -1,12 +1,10 @@
 import {Formik} from 'formik';
-import React, {useCallback, useEffect, useState} from 'react';
-import {Image, View, Text, SafeAreaView, TouchableOpacity} from 'react-native';
+import React, {useCallback, useState} from 'react';
+import {View, Text, SafeAreaView, TouchableOpacity} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {StackScreenProps} from '@react-navigation/stack';
-import {images} from 'assets';
 import {Input, Button} from 'components';
 import {LoginRequest, StackParams, AppDispatch} from 'types';
-import {axios} from 'utils';
 import styles from './styles';
 import {login} from './thunk';
 import validationSchema from './validationSchema';

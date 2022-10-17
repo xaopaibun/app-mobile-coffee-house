@@ -1,5 +1,10 @@
 import {AxiosInstance, AxiosPromise} from 'axios';
-import {CategoryType, ProductItem} from 'src/types/home';
+import {
+  BaseResponse,
+  CategoryType,
+  ProductItem,
+  RequestBaseParams,
+} from 'src/types/home';
 
 class Home {
   private readonly axios: AxiosInstance;
@@ -7,24 +12,31 @@ class Home {
     this.axios = axios;
   }
 
-  getData(): AxiosPromise<Array<ProductItem>> {
+  getData(params: RequestBaseParams): AxiosPromise<BaseResponse<ProductItem>> {
     return this.axios({
       method: 'GET',
       url: '/product/list-products',
+      params,
     });
   }
 
-  getDataCategory(): AxiosPromise<Array<CategoryType>> {
+  getDataCategory(
+    params: RequestBaseParams,
+  ): AxiosPromise<BaseResponse<CategoryType>> {
     return this.axios({
       method: 'GET',
       url: '/category/getdata',
+      params,
     });
   }
 
-  getProductByCategory(_category: string): AxiosPromise<Array<ProductItem>> {
+  getProductByCategory(
+    params: RequestBaseParams,
+  ): AxiosPromise<BaseResponse<ProductItem>> {
     return this.axios({
       method: 'GET',
-      url: `/product/list-products`,
+      url: '/product/list-products',
+      params,
     });
   }
 }

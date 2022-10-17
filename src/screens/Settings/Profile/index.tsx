@@ -7,9 +7,10 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {StackScreenProps} from '@react-navigation/stack';
 import {images} from 'assets';
+import {authSelectors} from 'containers/App/selector';
 import {logout} from 'containers/App/slice';
 import {StackParams} from 'types';
 import styles from './styles';
@@ -17,6 +18,8 @@ import styles from './styles';
 type Props = StackScreenProps<StackParams, 'Home'>;
 const ProfileScreen: React.FC<Props> = ({navigation}) => {
   const dispatch = useDispatch();
+
+  const {user} = useSelector(authSelectors);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -48,12 +51,12 @@ const ProfileScreen: React.FC<Props> = ({navigation}) => {
           <Image
             style={styles.avatar}
             source={{
-              uri: 'https://scontent.fhan2-1.fna.fbcdn.net/v/t39.30808-6/291417760_2580211752126885_7742110454069241259_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=h2glk_cpExAAX95vzYU&tn=rNIOW-CEnQr-FK5P&_nc_ht=scontent.fhan2-1.fna&oh=00_AT_NHjBtDOPXf0d9S5KRevyyBqrmBgWM3Dx1VOHQNQ42Fg&oe=62CD69E7',
+              uri: user.avatar,
             }}
           />
           <View style={styles.info}>
-            <Text style={styles.text_bold}>Pham Jin</Text>
-            <Text style={styles.text}>Vanquy33338888@gmail.com</Text>
+            <Text style={styles.text_bold}>{user.name}</Text>
+            <Text style={styles.text}>{user.email}</Text>
           </View>
         </View>
         <TouchableOpacity style={styles.info_item} onPress={goMyOrder}>

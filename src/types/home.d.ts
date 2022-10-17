@@ -28,5 +28,11 @@ export interface BaseResponse<T> {
 }
 export interface CategoryType {
   category_name: string;
-  _id: number;
+  _id: string;
+}
+
+export interface RequestBaseParams {
+  limit: number;
+  page: number;
+  category_id?: string;
 }

@@ -22,10 +22,11 @@ import {getDataCategory, getDataProduct, getProductByCategory} from './thunk';
 type Props = StackScreenProps<StackParams, 'Home'>;
 
 const HomeScreen: React.FC<Props> = ({navigation}) => {
-  const [idTab, setIDTab] = useState<number>(0);
   const dispatch = useDispatch();
 
   const {products, category, loading} = useSelector(homeSelectors);
+
+  const [idTab, setIDTab] = useState<string>('');
 
   const handleOnCart = () => navigation.navigate('CartScreen');
 
@@ -35,7 +36,20 @@ const HomeScreen: React.FC<Props> = ({navigation}) => {
   };
 
   useEffect(() => {
-    Promise.all([dispatch(getDataProduct()), dispatch(getDataCategory())]);
+    Promise.all([
+      dispatch(
+        getDataCategory({
+          limit: 10,
+          page: 1,
+        }),
+      ),
+      dispatch(
+        getDataProduct({
+          limit: 10,
+          page: 1,
+        }),
+      ),
+    ]);
   }, [dispatch]);
 
   return (
@@ -56,17 +70,19 @@ const HomeScreen: React.FC<Props> = ({navigation}) => {
         <View style={styles.viewSelect}>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             {category &&
-              category?.map((value, index) => (
+              category.map((value, index) => (
                 <TouchableOpacity
                   style={idTab === value._id ? styles.btn : styles.btnOutline}
                   key={index}
                   onPress={() => {
                     setIDTab(value._id);
-                    // if (value.name === 'tat-ca') {
-                    //   dispatch(getDataProduct());
-                    // } else {
-                    //   dispatch(getProductByCategory(value.name));
-                    // }
+                    dispatch(
+                      getProductByCategory({
+                        limit: 10,
+                        page: 1,
+                        category_id: value._id,
+                      }),
+                    );
                   }}>
                   <Text
                     style={

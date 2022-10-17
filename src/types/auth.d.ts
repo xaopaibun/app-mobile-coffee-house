@@ -16,10 +16,19 @@ export interface LoginResponse {
       token: string;
     };
   };
-  user: {
-    email: string;
-    name: string;
-  };
+  user: User;
+}
+
+export interface User {
+  role: 'user';
+  _id: string;
+  email: string;
+  name: string;
+  avatar: string;
+  sex: 1 | 0;
+  address: string;
+  phone: string;
+  age: number;
 }
 
 export interface ResponseError {}
