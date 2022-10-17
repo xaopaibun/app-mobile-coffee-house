@@ -10,6 +10,13 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import {
+  Platform,
+  DeviceEventEmitter,
+  NativeModules,
+  NativeEventEmitter,
+} from 'react-native';
+import RNMomosdk from 'react-native-momosdk';
 import {useDispatch, useSelector} from 'react-redux';
 import {StackScreenProps} from '@react-navigation/stack';
 import {images} from 'assets';
@@ -19,6 +26,15 @@ import {homeSelectors} from './selector';
 import styles from './styles';
 import {getDataCategory, getDataProduct, getProductByCategory} from './thunk';
 
+const RNMomosdkModule = NativeModules.RNMomosdk;
+const EventEmitter = new NativeEventEmitter(RNMomosdkModule);
+
+const merchantname = 'CGV Cinemas';
+const merchantcode = 'CGV01';
+const merchantNameLabel = 'Nhà cung cấp';
+const billdescription = 'Fast and Furious 8';
+const amount = 50000;
+const enviroment = '0'; //"0": SANBOX , "1": PRODUCTION
 type Props = StackScreenProps<StackParams, 'Home'>;
 
 const HomeScreen: React.FC<Props> = ({navigation}) => {
@@ -35,6 +51,37 @@ const HomeScreen: React.FC<Props> = ({navigation}) => {
     navigation.navigate('ProductScreen');
   };
 
+  useEffect(() => {
+    EventEmitter.addListener(
+      'RCTMoMoNoficationCenterRequestTokenReceived',
+      (response) => {
+        try {
+          console.log('<MoMoPay>Listen.Event::' + JSON.stringify(response));
+          if (response && response.status == 0) {
+            //SUCCESS: continue to submit momoToken,phonenumber to server
+            let fromapp = response.fromapp; //ALWAYS:: fromapp==momotransfer
+            let momoToken = response.data;
+            let phonenumber = response.phonenumber;
+            let message = response.message;
+            let orderId = response.refOrderId;
+          } else {
+            //let message = response.message;
+            //Has Error: show message here
+          }
+        } catch (ex) {}
+      },
+    );
+    //OPTIONAL
+    EventEmitter.addListener(
+      'RCTMoMoNoficationCenterRequestTokenState',
+      (response) => {
+        console.log('<MoMoPay>Listen.RequestTokenState:: ' + response.status);
+        // status = 1: Parameters valid & ready to open MoMo app.
+        // status = 2: canOpenURL failed for URL MoMo app
+        // status = 3: Parameters invalid
+      },
+    );
+  }, []);
   useEffect(() => {
     Promise.all([
       dispatch(
