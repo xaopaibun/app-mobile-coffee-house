@@ -8,6 +8,7 @@ import HomeScreen from 'screens/Home';
 import CartScreen from 'screens/Home/Cart';
 import CheckOutScreen from 'screens/Home/CheckOut';
 import CongratsScreen from 'screens/Home/Congrats';
+import Payment from 'screens/Home/Payment';
 import ProductScreen from 'screens/Home/Product';
 import NotifyScreen from 'screens/Notify';
 import MyOrderScreen from 'screens/Settings/Order';
@@ -145,6 +146,11 @@ const PrivateNavigation = () => {
       <Stack.Screen
         name="Congrats"
         component={CongratsScreen}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Payment"
+        component={Payment}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

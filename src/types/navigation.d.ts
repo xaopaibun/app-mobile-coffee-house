@@ -11,4 +11,7 @@ export type StackParams = {
   ShippingScreen: undefined;
   PaymentScreen: undefined;
   SettingScreen: undefined;
+  Payment: {
+    link: string;
+  };
 };

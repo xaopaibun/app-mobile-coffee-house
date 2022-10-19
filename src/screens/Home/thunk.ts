@@ -46,3 +46,16 @@ export const getProductByCategory = createAsyncThunk<
     return rejectWithValue(err);
   }
 });
+
+export const orderProduct = createAsyncThunk<
+  BaseResponse<ProductItem>,
+  RequestBaseParams,
+  TYPE.ThunkAPI<TYPE.ResponseError>
+>('product/thunk/order', async (params, {rejectWithValue}) => {
+  try {
+    const {data} = await homeService.getProductByCategory(params);
+    return data;
+  } catch (err) {
+    return rejectWithValue(err);
+  }
+});

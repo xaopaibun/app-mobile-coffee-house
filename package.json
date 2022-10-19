@@ -29,6 +29,7 @@
     "react-native-reanimated": "^2.0.0",
     "react-native-safe-area-context": "^3.2.0",
     "react-native-screens": "^2.18.1",
+    "react-native-webview": "^11.23.1",
     "react-redux": "^7.2.3",
     "redux-persist": "^6.0.0",
     "socket.io": "^4.5.2",

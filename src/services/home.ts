@@ -39,5 +39,15 @@ class Home {
       params,
     });
   }
+
+  orderProduct(
+    params: RequestBaseParams,
+  ): AxiosPromise<BaseResponse<ProductItem>> {
+    return this.axios({
+      method: 'GET',
+      url: '/product/list-products',
+      params,
+    });
+  }
 }
 export default Home;

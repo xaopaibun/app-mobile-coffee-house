@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Image,
   SafeAreaView,
@@ -10,19 +10,44 @@ import {
 import {useDispatch, useSelector} from 'react-redux';
 import {StackScreenProps} from '@react-navigation/stack';
 import {images} from 'assets';
+import {Button} from 'components';
 import {resetCart} from 'containers/App/slice';
 import {StackParams} from 'types';
+import {axios} from 'utils';
 import {homeSelectors} from '../selector';
 import styles from './styles';
 
-type Props = StackScreenProps<StackParams, 'Home'>;
+type Props = StackScreenProps<StackParams, 'Payment'>;
 
+const formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+});
 const CheckOutScreen: React.FC<Props> = ({navigation}) => {
   const goBack = () => navigation.goBack();
-
-  const {money} = useSelector(homeSelectors);
+  const [loading, setLoading] = useState<boolean>(false);
+  const {money, cart} = useSelector(homeSelectors);
 
   const dispatch = useDispatch();
+
+  const handleSubmitOrder = async () => {
+    const payload = cart.map((item) => ({
+      name: item.name,
+      price: (item.price / 23000).toFixed(2),
+      currency: 'USD',
+      quantity: item.quatity,
+    }));
+    console.log(222, payload);
+    try {
+      setLoading(true);
+      const {data} = await axios.post('/payment/pay', {cart: payload});
+      console.log(111, data);
+      setLoading(false);
+      navigation.navigate('Payment', {link: data.links[1].href});
+    } catch (error) {}
+
+    // navigation.navigate('Congrats');
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -110,14 +135,14 @@ const CheckOutScreen: React.FC<Props> = ({navigation}) => {
           </View>
         </View>
       </ScrollView>
-      <TouchableOpacity
-        style={styles.btn}
-        onPress={() => {
-          dispatch(resetCart());
-          navigation.navigate('Congrats');
-        }}>
-        <Text style={styles.textBtn}>SUBMIT ORDER</Text>
-      </TouchableOpacity>
+      <Button
+        label="SUBMIT ORDER"
+        onPress={handleSubmitOrder}
+        isLoading={loading}
+        disabled={loading}
+        containerStyle={styles.btn}
+        testID="btnSubmit"
+      />
     </SafeAreaView>
   );
 };
