@@ -1,4 +1,9 @@
-export interface User {}
+export interface User {
+  avatar: string;
+  name: string;
+  email: string;
+  role: 'admin';
+}
 
 export interface FindAllUserReq {}
 export interface FindAllUserRes {}

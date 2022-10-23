@@ -1,6 +1,6 @@
 import { AxiosInstance, AxiosPromise, AxiosRequestConfig } from 'axios';
 import * as Types from 'types';
-import { instanceMock } from 'libs';
+import { instance } from 'libs';
 
 export default class UserService implements Types.RestfulApiService {
   protected _axios: AxiosInstance;
@@ -14,30 +14,39 @@ export default class UserService implements Types.RestfulApiService {
     return this._axios(request);
   }
 
-  // getOne(id: string, params: Types.GetOneUserReq): AxiosPromise<Types.GetOneUserRes> {
-  //   const request: AxiosRequestConfig = {};
-  //   return this._axios(request);
-  // }
+  getListUser(params: Types.BaseParams): AxiosPromise<Types.ResponseBase<Types.User>> {
+    const request: AxiosRequestConfig = {
+      url: '/users',
+      method: 'GET',
+      params,
+    };
+    return this._axios(request);
+  }
 
-  // create(data: Types.CreateUserReq): AxiosPromise<Types.CreateUserRes> {
-  //   const request: AxiosRequestConfig = {};
-  //   return this._axios(request);
-  // }
+  createUser(data: FormData): AxiosPromise<undefined> {
+    const request: AxiosRequestConfig = {
+      url: '/user',
+      method: 'POST',
+      data,
+    };
+    return this._axios(request);
+  }
 
-  // update(id: string | number, data: Types.UpdateUserReq): AxiosPromise<Types.UpdateUserRes> {
-  //   const request: AxiosRequestConfig = {};
-  //   return this._axios(request);
-  // }
+  deleteUserByID(id: string): AxiosPromise<undefined> {
+    const request: AxiosRequestConfig = {
+      url: `/users/${id}`,
+      method: 'DELETE',
+    };
+    return this._axios(request);
+  }
 
-  // patch(id: string | number, data: Types.PatchUserReq): AxiosPromise<Types.PatchUserRes> {
-  //   const request: AxiosRequestConfig = {};
-  //   return this._axios(request);
-  // }
-
-  // remove(id: string | number, params: Types.RemoveUserReq): AxiosPromise<Types.RemoveUserRes> {
-  //   const request: AxiosRequestConfig = {};
-  //   return this._axios(request);
-  // }
+  updateUserByID(id: string): AxiosPromise<undefined> {
+    const request: AxiosRequestConfig = {
+      url: `/users/${id}`,
+      method: 'PATCH',
+    };
+    return this._axios(request);
+  }
 }
 
-export const userService = new UserService(instanceMock);
+export const userService = new UserService(instance);

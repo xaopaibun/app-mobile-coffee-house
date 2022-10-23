@@ -3,13 +3,37 @@ import * as Pages from 'pages';
 
 export const routes = {
   Login: {
-    path: 'login',
+    path: '/login',
     element: <Pages.LoginPage />,
   },
   Dashboard: {
+    path: '/',
     index: true,
     element: <Pages.DashboardPage />,
-    route: {},
+  },
+  CreateProduct: {
+    path: '/create-product',
+    element: <Pages.CreateProductPage />,
+  },
+  Category: {
+    path: '/category',
+    element: <Pages.CategoryPage />,
+  },
+  Users: {
+    path: '/users',
+    element: <Pages.UsersPage />,
+  },
+  UpdateProduct: {
+    path: '/update-product/:id',
+    element: <Pages.UpdateProductPage />,
+  },
+  OrderPage: {
+    path: '/order',
+    element: <Pages.OrderPage />,
+  },
+  UpdateOrderPage: {
+    path: '/order/:id',
+    element: <Pages.OrderDetailPage />,
   },
 };
 

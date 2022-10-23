@@ -5,7 +5,7 @@ import { store } from 'store';
 import { Navigations } from 'navigations';
 import GlobalStyle from 'styles';
 import reportWebVitals from './reportWebVitals';
-
+import 'antd/dist/antd.min.css';
 ReactDOM.render(
   <React.StrictMode>
     <GlobalStyle />

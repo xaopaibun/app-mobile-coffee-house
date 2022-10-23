@@ -1,6 +1,6 @@
 import { AxiosInstance, AxiosPromise, AxiosRequestConfig } from 'axios';
+import { instance } from 'libs';
 import * as Types from 'types';
-import { instanceMock } from 'libs';
 
 class AuthService implements Types.AuthService {
   protected _axios: AxiosInstance;
@@ -10,7 +10,11 @@ class AuthService implements Types.AuthService {
   }
 
   signIn(data: Types.SignInReq): AxiosPromise<Types.SignInRes> {
-    const request: AxiosRequestConfig = {};
+    const request: AxiosRequestConfig = {
+      url: '/auth/login',
+      method: 'POST',
+      data,
+    };
     return this._axios(request);
   }
 
@@ -20,4 +24,4 @@ class AuthService implements Types.AuthService {
   }
 }
 
-export const authService = new AuthService(instanceMock);
+export const authService = new AuthService(instance);

@@ -3,8 +3,12 @@ import styled from 'styled-components';
 type Props = {};
 
 export default styled.section<Props>`
-  && {
-    /* TODO remove here */
-    //background-color: var(--primary-color);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .form-login {
+    width: 350px;
+    margin: auto;
   }
 `;
