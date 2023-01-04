@@ -7,11 +7,10 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {StackScreenProps} from '@react-navigation/stack';
 import {images} from 'assets';
 import {Button} from 'components';
-import {resetCart} from 'containers/App/slice';
 import {StackParams} from 'types';
 import {axios} from 'utils';
 import {homeSelectors} from '../selector';
@@ -19,31 +18,23 @@ import styles from './styles';
 
 type Props = StackScreenProps<StackParams, 'Payment'>;
 
-const formatter = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD',
-});
 const CheckOutScreen: React.FC<Props> = ({navigation}) => {
   const goBack = () => navigation.goBack();
   const [loading, setLoading] = useState<boolean>(false);
-  const {money, cart} = useSelector(homeSelectors);
-
-  const dispatch = useDispatch();
+  const {money} = useSelector(homeSelectors);
 
   const handleSubmitOrder = async () => {
-    const payload = cart.map((item) => ({
-      name: item.name,
-      price: (item.price / 23000).toFixed(2),
-      currency: 'USD',
-      quantity: item.quatity,
-    }));
-    console.log(222, payload);
     try {
       setLoading(true);
-      const {data} = await axios.post('/payment/pay', {cart: payload});
-      console.log(111, data);
+      const {data} = await axios.post('/pay/create_payment_url', {
+        amount: money,
+        language: 'vn',
+        orderType: 'billpayment',
+        orderDescription: 'Thanh toán đơn hàng',
+        bankCode: '',
+      });
       setLoading(false);
-      navigation.navigate('Payment', {link: data.links[1].href});
+      navigation.navigate('Payment', {link: data.vnpUrl});
     } catch (error) {}
 
     // navigation.navigate('Congrats');

@@ -4,11 +4,12 @@ export interface ProductItem {
   price: number;
   content: string;
   category: string;
-  image: string;
-  star: number;
-  favorites?: boolean;
-  shipping: boolean;
+  image: Array<string>;
   category_id: string;
+  variant: Array<{
+    name: string;
+    option: Array<{value: string; price: number; _id: string}>;
+  }>;
 }
 
 export interface CartItem {

@@ -11,9 +11,11 @@ const Payment: React.FC = ({route, navigation}: any) => {
           uri: route.params.link,
         }}
         onNavigationStateChange={(navState) => {
-          console.log(navState);
-          if (navState.url.search('/v1/payment/success') !== -1) {
+          if (navState.url.search('/order/vnpay_return') !== -1) {
             navigation.navigate('Congrats');
+          }
+          if (navState.url.search('/v1/cancel') !== -1) {
+            navigation.navigate('CheckOutScreen');
           }
         }}
       />

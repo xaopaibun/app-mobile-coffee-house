@@ -1,41 +1,12 @@
-import {
-  ImageStyle,
-  StyleSheet,
-  TextStyle,
-  TouchableOpacityProps,
-  ViewStyle,
-} from 'react-native';
+import {StyleSheet} from 'react-native';
 
-type Props = {
-  container: ViewStyle;
-  image: ImageStyle;
-  image_product: ImageStyle;
-  name: TextStyle;
-  content: TextStyle;
-  wrap_content: ViewStyle;
-  wrap_price_quatity: ViewStyle;
-  price: TextStyle;
-  flex: ViewStyle;
-  btn_augment: TouchableOpacityProps;
-  number: TextStyle;
-  wrap_btn: ViewStyle;
-  btn_add_cart: TouchableOpacityProps;
-  btn_favorites: TouchableOpacityProps;
-  text_btn: TextStyle;
-  content_top: ViewStyle;
-  btn_back: TouchableOpacityProps;
-  wrap_star: ViewStyle;
-  number_star: TextStyle;
-  label_review: ViewStyle;
-};
-
-export default StyleSheet.create<Props>({
+export default StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#ffffff',
   },
   image: {
-    flex: 6,
+    flex: 4,
     flexDirection: 'row',
     justifyContent: 'flex-end',
     position: 'relative',
@@ -54,8 +25,8 @@ export default StyleSheet.create<Props>({
     position: 'absolute',
     width: 40,
     height: 40,
-    top: 75,
-    left: '11%',
+    top: 30,
+    left: '5%',
     zIndex: 99,
     flexDirection: 'row',
     alignItems: 'center',
@@ -72,15 +43,15 @@ export default StyleSheet.create<Props>({
   wrap_content: {
     flex: 4,
     padding: 25,
+    paddingBottom: 0,
   },
   image_product: {
-    height: '100%',
     width: '85%',
-    backgroundColor: '#F5F5F5',
+    backgroundColor: '#ffffff',
     borderBottomLeftRadius: 60,
   },
   name: {
-    fontSize: 24,
+    fontSize: 18,
     color: '#303030',
     fontWeight: '700',
   },
@@ -97,8 +68,7 @@ export default StyleSheet.create<Props>({
   },
   price: {
     color: '#303030',
-    fontWeight: '700',
-    fontSize: 30,
+    fontSize: 18,
   },
   flex: {
     flexDirection: 'row',
@@ -166,5 +136,36 @@ export default StyleSheet.create<Props>({
     fontWeight: '600',
     color: '#808080',
     marginLeft: 8,
+  },
+  btnOutline: {
+    backgroundColor: '#FFFFFF',
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    borderWidth: 1,
+    borderRadius: 8,
+    marginRight: 10,
+  },
+  textBtnOutline: {
+    color: '#303030',
+    fontSize: 14,
+  },
+  btn: {
+    backgroundColor: '#242424',
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    borderRadius: 8,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: 10,
+  },
+  textBtn: {
+    color: '#FFFFFF',
+    fontSize: 14,
+  },
+  selectOption: {
+    marginBottom: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 });

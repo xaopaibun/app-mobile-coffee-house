@@ -61,7 +61,7 @@ const HomeScreen: React.FC<Props> = ({navigation}) => {
           </TouchableOpacity>
           <View>
             <Text style={styles.title}>Menu</Text>
-            <Text style={styles.subTitle}>Coffee House</Text>
+            <Text style={styles.subTitle}>Shop Đồ Câu Phạm Jin</Text>
           </View>
           <TouchableOpacity onPress={handleOnCart}>
             <Image source={images.cart} />
@@ -108,7 +108,7 @@ const HomeScreen: React.FC<Props> = ({navigation}) => {
                 onPress={() => handleOnDetail(item)}>
                 <View style={styles.imageView}>
                   <Image
-                    source={{uri: item.image}}
+                    source={{uri: item.image[0]}}
                     style={styles.imageProduct}
                   />
                   <TouchableOpacity style={styles.shopping}>
@@ -120,7 +120,8 @@ const HomeScreen: React.FC<Props> = ({navigation}) => {
                 </View>
                 <Text style={styles.name}>{item.name}</Text>
                 <Text style={styles.price}>
-                  {Intl.NumberFormat().format(item.price)} VND
+                  {Intl.NumberFormat().format(item.variant[0].option[0].price)}{' '}
+                  VND
                 </Text>
               </TouchableOpacity>
             )}
