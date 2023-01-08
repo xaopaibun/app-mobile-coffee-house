@@ -27,7 +27,7 @@ type Props = {
   flex_dhl: ViewStyle;
 };
 
-export default StyleSheet.create<Props>({
+export default StyleSheet.create({
   container: {
     flex: 1,
   },
@@ -51,13 +51,13 @@ export default StyleSheet.create<Props>({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 20,
-    marginHorizontal: 20,
-    marginTop: 20,
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    marginRight: 10,
   },
   textBtn: {
     fontWeight: '700',
-    fontSize: 20,
+    fontSize: 14,
     color: '#FFFFFF',
   },
   item_header: {
@@ -108,6 +108,11 @@ export default StyleSheet.create<Props>({
     justifyContent: 'space-between',
     marginVertical: 10,
   },
+  flexPayment: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 10,
+  },
   price: {
     fontWeight: '600',
     color: '#242424',
@@ -127,5 +132,20 @@ export default StyleSheet.create<Props>({
   flex_dhl: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  btnOutline: {
+    backgroundColor: '#FFFFFF',
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    borderWidth: 1,
+    borderRadius: 8,
+    marginRight: 10,
+  },
+  textBtnOutline: {
+    color: '#303030',
+    fontSize: 14,
+  },
+  footer: {
+    marginHorizontal: 20,
   },
 });

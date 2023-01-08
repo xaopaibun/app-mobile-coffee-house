@@ -46,7 +46,7 @@ const CartScreen: React.FC<Props> = ({navigation}) => {
             <Image source={images.prev} />
           </TouchableOpacity>
           <View>
-            <Text style={styles.subTitle}>My Cart</Text>
+            <Text style={styles.subTitle}>Giỏ hàng của tôi</Text>
           </View>
           <View />
         </View>
@@ -61,7 +61,7 @@ const CartScreen: React.FC<Props> = ({navigation}) => {
               <View style={styles.info}>
                 <Text style={styles.name}>{item.name}</Text>
                 <Text style={styles.price}>
-                  {Intl.NumberFormat().format(item.price)}
+                  {Intl.NumberFormat().format(item.price)} VND - {item.option}
                 </Text>
                 <View style={styles.flex}>
                   <TouchableOpacity
@@ -69,7 +69,7 @@ const CartScreen: React.FC<Props> = ({navigation}) => {
                     onPress={() => handleIncrease(item._id)}>
                     <Image source={images.add} />
                   </TouchableOpacity>
-                  <Text style={styles.number}>{item.quatity}</Text>
+                  <Text style={styles.number}>{item.quantity}</Text>
                   <TouchableOpacity
                     style={styles.btn_augment}
                     onPress={() => handleDecrement(item._id)}>
@@ -90,7 +90,7 @@ const CartScreen: React.FC<Props> = ({navigation}) => {
       </ScrollView>
       <View style={[styles.flex_total, styles.promo]}>
         <TextInput
-          placeholder="Enter your promo code"
+          placeholder="Vui lòng nhập mã giảm giá (nếu có)"
           style={styles.promo_code}
         />
         <TouchableOpacity style={styles.btnNext}>
@@ -98,13 +98,13 @@ const CartScreen: React.FC<Props> = ({navigation}) => {
         </TouchableOpacity>
       </View>
       <View style={styles.flex_total}>
-        <Text style={styles.text_total}>Total:</Text>
+        <Text style={styles.text_total}>Tổng:</Text>
         <Text style={styles.total}>
           {Intl.NumberFormat().format(money)} VND
         </Text>
       </View>
       <TouchableOpacity style={styles.btn} onPress={handleGoCheckOut}>
-        <Text style={styles.textBtn}>Check out</Text>
+        <Text style={styles.textBtn}>Thanh toán</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );

@@ -24,15 +24,15 @@ import styles from './styles';
 type Props = StackScreenProps<StackParams, 'Home'>;
 
 const ProductScreen: React.FC<Props> = ({navigation}) => {
-  const [quatity, setQuatity] = useState<number>(1);
+  const [quantity, setquantity] = useState<number>(1);
   const [isLove, setIsLove] = useState<boolean>(false);
   const [optionSelected, setOptionSelected] = useState<any>();
 
   const {productDetail} = useSelector(homeSelectors);
-  const handleIncrement = () => setQuatity(quatity + 1);
+  const handleIncrement = () => setquantity(quantity + 1);
 
   const handleDecrement = () =>
-    setQuatity((state) => (state > 1 ? state - 1 : state));
+    setquantity((state) => (state > 1 ? state - 1 : state));
 
   const dispatch = useDispatch();
 
@@ -42,9 +42,13 @@ const ProductScreen: React.FC<Props> = ({navigation}) => {
     dispatch(
       addCart({
         _id: product._id,
-        quatity,
-        name: product.name,
+        quantity,
+        name: `${product.name} - ${optionSelected.value}`,
         option: optionSelected.value,
+        length: product.length,
+        weight: product.weight,
+        width: product.width,
+        height: product.height,
         price: optionSelected.price,
         image: product.image[0],
       }),
@@ -123,7 +127,7 @@ const ProductScreen: React.FC<Props> = ({navigation}) => {
           style={styles.content_top}
           showsVerticalScrollIndicator={false}>
           <Text style={styles.name}>{productDetail.name}</Text>
-          <View style={styles.wrap_price_quatity}>
+          <View style={styles.wrap_price_quantity}>
             <Text style={styles.price}>
               {!optionSelected
                 ? `${formatMoney(
@@ -143,8 +147,8 @@ const ProductScreen: React.FC<Props> = ({navigation}) => {
                 <Image source={images.add} />
               </TouchableOpacity>
               <Text style={styles.number}>
-                {quatity < 10 && '0'}
-                {quatity}
+                {quantity < 10 && '0'}
+                {quantity}
               </Text>
               <TouchableOpacity
                 style={styles.btn_augment}
@@ -194,9 +198,11 @@ const ProductScreen: React.FC<Props> = ({navigation}) => {
             <Image source={!isLove ? images.marker : images.marker_active} />
           </TouchableOpacity>
           <TouchableOpacity
-            style={styles.btn_add_cart}
+            disabled={!optionSelected}
+            // eslint-disable-next-line react-native/no-inline-styles
+            style={[styles.btn_add_cart, {opacity: !optionSelected ? 0.6 : 1}]}
             onPress={() => handleAddCart(productDetail)}>
-            <Text style={styles.text_btn}>Add to cart</Text>
+            <Text style={styles.text_btn}>Thêm vào giỏ hàng</Text>
           </TouchableOpacity>
         </View>
       </View>

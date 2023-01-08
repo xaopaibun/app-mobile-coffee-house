@@ -54,14 +54,17 @@ const AppSlice = createSlice({
     },
     addCart: (state, action: PayloadAction<CartItem>) => {
       const cart = state.home.cart;
-      const index = cart.findIndex(({_id}) => action.payload._id === _id);
+      const index = cart.findIndex(
+        ({_id, option}) =>
+          action.payload._id === _id && action.payload.option === option,
+      );
       if (index < 0) {
         cart.push(action.payload);
       } else {
-        cart[index].quatity = cart[index].quatity + action.payload.quatity;
+        cart[index].quantity = cart[index].quantity + action.payload.quantity;
       }
       const money = cart.reduce(function (total, currentValue) {
-        return total + currentValue.price * currentValue.quatity;
+        return total + currentValue.price * currentValue.quantity;
       }, 0);
       state.home.cart = cart;
       state.home.money = money;
@@ -71,7 +74,7 @@ const AppSlice = createSlice({
       state.home.cart = cart.filter((item) => item._id !== action.payload);
       state.home.money = state.home.cart.reduce(
         (total, currentValue) =>
-          total + currentValue.price * currentValue.quatity,
+          total + currentValue.price * currentValue.quantity,
         0,
       );
     },
@@ -95,12 +98,12 @@ const AppSlice = createSlice({
       const cart = state.home.cart;
       const index = cart.findIndex(({_id}) => action.payload === _id);
       if (index >= 0) {
-        cart[index].quatity = cart[index].quatity + 1;
+        cart[index].quantity = cart[index].quantity + 1;
       }
       state.home.cart = cart;
       state.home.money = state.home.cart.reduce(
         (total, currentValue) =>
-          total + currentValue.price * currentValue.quatity,
+          total + currentValue.price * currentValue.quantity,
         0,
       );
     },
@@ -108,15 +111,15 @@ const AppSlice = createSlice({
       const cart = state.home.cart;
       const index = cart.findIndex(({_id}) => action.payload === _id);
       if (index >= 0) {
-        cart[index].quatity = cart[index].quatity - 1;
+        cart[index].quantity = cart[index].quantity - 1;
       }
-      if (cart[index].quatity === 0) {
+      if (cart[index].quantity === 0) {
         cart.splice(index, 1);
       }
       state.home.cart = cart;
       state.home.money = state.home.cart.reduce(
         (total, currentValue) =>
-          total + currentValue.price * currentValue.quatity,
+          total + currentValue.price * currentValue.quantity,
         0,
       );
     },

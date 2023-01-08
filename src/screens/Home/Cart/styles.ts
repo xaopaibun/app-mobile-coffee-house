@@ -53,6 +53,7 @@ export default StyleSheet.create<Props>({
   },
   item: {
     flexDirection: 'row',
+    alignItems: 'center',
     justifyContent: 'space-between',
     width: '100%',
     paddingVertical: 12,
@@ -80,10 +81,10 @@ export default StyleSheet.create<Props>({
   },
   info: {
     marginHorizontal: 20,
-    flex: 0.85,
+    flex: 1,
   },
   func: {
-    flex: 0.15,
+    flex: 0.1,
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'space-between',

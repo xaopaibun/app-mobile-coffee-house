@@ -4,6 +4,10 @@ export interface ProductItem {
   price: number;
   content: string;
   category: string;
+  length: number;
+  width: number;
+  height: number;
+  weight: number;
   image: Array<string>;
   category_id: string;
   variant: Array<{
@@ -14,10 +18,15 @@ export interface ProductItem {
 
 export interface CartItem {
   _id: number;
+  option: string;
   name: string;
   price: number;
   image: string;
-  quatity: number;
+  quantity: number;
+  length: number;
+  weight: number;
+  width: number;
+  height: number;
 }
 
 export interface BaseResponse<T> {

@@ -46,7 +46,6 @@ export default StyleSheet.create<Props>({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-around',
-    marginVertical: 30,
   },
   content: {
     height: 'auto',

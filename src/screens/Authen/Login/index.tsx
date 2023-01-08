@@ -1,8 +1,9 @@
 import {Formik} from 'formik';
 import React, {useCallback, useState} from 'react';
-import {View, Text, SafeAreaView, TouchableOpacity} from 'react-native';
+import {View, Text, SafeAreaView, TouchableOpacity, Image} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {StackScreenProps} from '@react-navigation/stack';
+import {images} from 'assets';
 import {Input, Button} from 'components';
 import {LoginRequest, StackParams, AppDispatch} from 'types';
 import styles from './styles';
@@ -37,11 +38,11 @@ const LoginScreen: React.FC<Props> = ({navigation}) => {
       <View style={styles.containerView}>
         <View style={styles.flex}>
           <View style={styles.borderLogin} />
-          {/* <Image source={images.logo_coffee} height={50} width={50} /> */}
+          <Image source={images.logo_fish} style={{width: 80, height: 80}} />
           <View style={styles.borderLogin} />
         </View>
-        <Text style={styles.title}>Hello !</Text>
-        <Text style={styles.subTitle}>WELCOME BACK</Text>
+        <Text style={styles.title}>Xin chào !</Text>
+        <Text style={styles.subTitle}>Shop đồ câu Phạm Jin</Text>
         <Formik
           onSubmit={handleOnSubmit}
           initialValues={initialValues}
@@ -58,10 +59,10 @@ const LoginScreen: React.FC<Props> = ({navigation}) => {
                 style={styles.input}
               />
               <TouchableOpacity>
-                <Text style={styles.labelBtn}>Forgot Password</Text>
+                <Text style={styles.labelBtn}>Quên mật khẩu</Text>
               </TouchableOpacity>
               <Button
-                label="Log in"
+                label="Đăng nhập"
                 onPress={handleSubmit}
                 isLoading={loading}
                 disabled={loading}
@@ -69,7 +70,7 @@ const LoginScreen: React.FC<Props> = ({navigation}) => {
                 testID="btnSubmit"
               />
               <TouchableOpacity onPress={handleSignUp}>
-                <Text style={styles.labelBtn}>SIGN UP</Text>
+                <Text style={styles.labelBtn}>Đăng ký tài khoản</Text>
               </TouchableOpacity>
               {/* <TouchableOpacity onPress={handleSignUp}>
                 <Text style={styles.labelBtn}>Login Faceboook</Text>

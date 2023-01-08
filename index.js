@@ -4,7 +4,6 @@ import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import {name as appName} from './app.json';
 import App from './src';
 
-// Must be outside of any component LifeCycle (such as `componentDidMount`).
 PushNotification.configure({
   // (optional) Called when Token is generated (iOS and Android)
   onRegister: function (token) {
