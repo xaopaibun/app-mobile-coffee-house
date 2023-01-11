@@ -8,6 +8,13 @@ export default createGlobalStyle`
   *{
     font-family:Helvetica;
   }
+  .text-input{
+    padding: 10px 12px;
+    &:hover, &:focus{
+      border-color: #5244e5;
+      box-shadow: unset;
+    }
+  }
   .ant-input-affix-wrapper-readonly {
       background: #f9f8f8;
       border-color: #eaeaea;

@@ -31,7 +31,7 @@ import {
 import { dashboardSelector } from './selectors';
 import DashboardStyled from './styles';
 
-const PER_PAGE = 5;
+const PER_PAGE = 10;
 
 const Dashboard: FC = () => {
   const dispatch = useAppDispatch();
@@ -88,7 +88,7 @@ const Dashboard: FC = () => {
       dataIndex: 'image',
       key: 'image',
       width: '5%',
-      render: (image: string, item: Product) => <img src={image} width={120} alt={item.name} />,
+      render: (image: string, item: Product) => <img src={image[0]} width={120} alt={item.name} />,
     },
     {
       title: 'Slug',
@@ -98,20 +98,12 @@ const Dashboard: FC = () => {
     },
     {
       title: 'Giá',
-      dataIndex: 'price',
-      key: 'price',
-      width: '9%',
-    },
-    {
-      title: 'Nội Dung',
-      dataIndex: 'content',
-      key: 'content',
-      width: '20%',
-    },
-    {
-      title: 'Số Lượng',
-      dataIndex: 'stock',
-      key: 'stock',
+      render: (_: string, item: Product) => (
+        <span>
+          {item.variant[0].option[0].price} VND -{' '}
+          {item.variant[0].option[item.variant[0].option.length - 1].price} VND
+        </span>
+      ),
       width: '9%',
     },
     {

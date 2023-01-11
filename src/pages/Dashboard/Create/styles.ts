@@ -30,6 +30,31 @@ export default styled.section<Props>`
       margin: 0 10px 0 7px;
     }
   }
+  .card {
+    margin: 20px 0;
+  }
+  .button-label {
+    color: #5244e5;
+    cursor: pointer;
+  }
+  .list-image {
+    display: flex;
+    flex-wrap: wrap;
+    .image,
+    .ant-upload-picture-card-wrapper {
+      width: 105px;
+      height: 105px;
+      margin-right: 10px;
+    }
+  }
+  .btn-add {
+    padding: 10px 16px;
+    border: 1px solid #5244e5;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   .wrap-submit {
     height: 95px;
     width: calc(100% - 240px);
@@ -49,25 +74,6 @@ export default styled.section<Props>`
       justify-content: center;
       align-items: center;
       width: 100%;
-      .btn {
-        border-radius: 5px;
-        border: none;
-        width: 16%;
-        height: 40px;
-        cursor: pointer;
-        &_submit {
-          margin-right: 12px;
-          color: #ffffff;
-          background-color: #f6ac00;
-          box-shadow: 1px 1px 4px rgba(68, 68, 68, 0.2);
-        }
-        &_close {
-          background: #ffffff;
-          border: 1px solid #d9d9d9;
-          box-shadow: 1px 1px 4px rgba(68, 68, 68, 0.2);
-          color: #777777;
-        }
-      }
     }
   }
 `;

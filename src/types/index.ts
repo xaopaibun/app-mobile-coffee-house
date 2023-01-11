@@ -15,17 +15,13 @@ export interface ResponseBase<T> {
 }
 
 export interface Product {
-  shipping: boolean;
   _id: string;
-  name: string;
   category_id: string;
-  slug: string;
-  price: number;
-  star: number;
-  stock: number;
-  information: string;
+  name: string;
+  image: Array<File>;
   content: string;
-  image: string;
+  slug: string;
+  variant: Array<VariantItem>;
 }
 
 export interface Category {
@@ -33,16 +29,26 @@ export interface Category {
   category_name: string;
 }
 
+interface OptionItem {
+  price: number;
+  value: string;
+  inventory: boolean;
+}
+interface VariantItem {
+  name: string;
+  option: Array<OptionItem>;
+}
 export interface PayloadCreateProduct {
   category_id: string;
   name: string;
-  image: File;
-  price: number;
+  image: Array<File>;
   content: string;
   slug: string;
-  star: number;
-  information: string;
-  stock: number;
+  width: number;
+  height: number;
+  length: number;
+  weight: number;
+  variant: Array<VariantItem>;
 }
 
 export interface User {

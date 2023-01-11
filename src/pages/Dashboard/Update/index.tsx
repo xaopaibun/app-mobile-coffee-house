@@ -54,7 +54,7 @@ const Update: FC = () => {
     initialValues: {
       name: '',
       category_id: '',
-      image: {} as File,
+      image: [] as Array<File>,
       price: 0,
       content: '',
       slug: '',
@@ -136,7 +136,7 @@ const Update: FC = () => {
                 src={
                   typeof formik.values.image === 'string'
                     ? formik.values.image
-                    : URL.createObjectURL(new Blob([formik.values.image as BlobPart]))
+                    : URL.createObjectURL(new Blob([formik.values.image as unknown as BlobPart]))
                 }
                 alt="image"
                 width={250}
