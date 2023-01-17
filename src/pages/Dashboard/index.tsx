@@ -156,6 +156,7 @@ const Dashboard: FC = () => {
   //   };
   // }, []);
 
+  console.log('abcd');
   return (
     <DashboardStyled>
       <HeaderDashboard title="Dashboard" className="header" />
