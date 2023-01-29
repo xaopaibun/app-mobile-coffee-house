@@ -8,8 +8,8 @@ class Order {
 
   createOrder(data: any): AxiosPromise<any> {
     return this.axios({
-      method: 'GET',
-      url: '/shiip/public-api/v2/shipping-order/create',
+      method: 'POST',
+      url: '/order/create',
       data,
     });
   }

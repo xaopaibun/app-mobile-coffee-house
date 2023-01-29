@@ -27,6 +27,7 @@ type Props = {
 export default StyleSheet.create<Props>({
   container: {
     flex: 1,
+    paddingHorizontal: 20,
   },
   containerView: {
     paddingHorizontal: 20,

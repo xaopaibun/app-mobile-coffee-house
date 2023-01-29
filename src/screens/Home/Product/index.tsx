@@ -56,14 +56,9 @@ const ProductScreen: React.FC<Props> = ({navigation}) => {
     navigation.navigate('CartScreen');
   };
 
-  const handleFavoriter = (id: number) => {
-    setIsLove((state) => !state);
+  const handleFavoriter = (id: string) => {
     dispatch(favoritesProductByID(id));
   };
-
-  useEffect(() => {
-    setIsLove(true);
-  }, []);
 
   const [index, setIndex] = useState(0);
   const scrollX = useRef(new Animated.Value(0)).current;
@@ -195,7 +190,11 @@ const ProductScreen: React.FC<Props> = ({navigation}) => {
           <TouchableOpacity
             style={styles.btn_favorites}
             onPress={() => handleFavoriter(productDetail._id)}>
-            <Image source={!isLove ? images.marker : images.marker_active} />
+            <Image
+              source={
+                !productDetail.favorites ? images.marker : images.marker_active
+              }
+            />
           </TouchableOpacity>
           <TouchableOpacity
             disabled={!optionSelected}

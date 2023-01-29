@@ -95,7 +95,6 @@ export default StyleSheet.create<Props>({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 20,
     marginHorizontal: 20,
     marginTop: 20,
   },

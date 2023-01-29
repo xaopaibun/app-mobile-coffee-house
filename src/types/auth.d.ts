@@ -7,7 +7,7 @@ export interface SignUpRequest {
   name: string;
   email: string;
   password: string;
-  confirm_password: string;
+  confirm_password?: string;
 }
 
 export interface LoginResponse {
@@ -32,10 +32,3 @@ export interface User {
 }
 
 export interface ResponseError {}
-
-export interface SignUpRequest {
-  email: string;
-  name: string;
-  password: string;
-  confirm_password: string;
-}

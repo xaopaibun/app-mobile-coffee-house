@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  Alert,
   Image,
   SafeAreaView,
   ScrollView,
@@ -23,13 +24,12 @@ const ProfileScreen: React.FC<Props> = ({navigation}) => {
 
   const handleLogout = () => {
     dispatch(logout());
+    Alert.alert('Thông báo', 'Bạn đã đăng xuất thành công!');
   };
 
   const goMyOrder = () => navigation.navigate('MyOrderScreen');
 
   const goShipping = () => navigation.navigate('ShippingScreen');
-
-  const goPayment = () => navigation.navigate('PaymentScreen');
 
   const goSetting = () => navigation.navigate('SettingScreen');
 
@@ -69,13 +69,6 @@ const ProfileScreen: React.FC<Props> = ({navigation}) => {
         <TouchableOpacity style={styles.info_item} onPress={goShipping}>
           <View>
             <Text style={styles.text_bold}>Shipping Addresses</Text>
-            <Text style={styles.text}>03 Addresses</Text>
-          </View>
-          <Image source={images.next} />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.info_item} onPress={goPayment}>
-          <View>
-            <Text style={styles.text_bold}>Payment Method</Text>
             <Text style={styles.text}>03 Addresses</Text>
           </View>
           <Image source={images.next} />

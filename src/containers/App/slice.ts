@@ -69,7 +69,7 @@ const AppSlice = createSlice({
       state.home.cart = cart;
       state.home.money = money;
     },
-    removeCartByID: (state, action: PayloadAction<number>) => {
+    removeCartByID: (state, action: PayloadAction<string>) => {
       const cart = state.home.cart;
       state.home.cart = cart.filter((item) => item._id !== action.payload);
       state.home.money = state.home.cart.reduce(
@@ -78,15 +78,16 @@ const AppSlice = createSlice({
         0,
       );
     },
-    favoritesProductByID: (state, action: PayloadAction<number>) => {
+    favoritesProductByID: (state, action: PayloadAction<string>) => {
       const products = state.home.products;
       const index = products.findIndex(({_id}) => action.payload === _id);
       if (index >= 0) {
         products[index].favorites = true;
       }
+      console.log(222, state.home.products);
       state.home.products = products;
     },
-    removeFavoriteProductByID: (state, action: PayloadAction<number>) => {
+    removeFavoriteProductByID: (state, action: PayloadAction<string>) => {
       const products = state.home.products;
       const index = products.findIndex(({_id}) => action.payload === _id);
       if (index >= 0) {
@@ -94,7 +95,7 @@ const AppSlice = createSlice({
       }
       state.home.products = products;
     },
-    increaseCartByID: (state, action: PayloadAction<number>) => {
+    increaseCartByID: (state, action: PayloadAction<string>) => {
       const cart = state.home.cart;
       const index = cart.findIndex(({_id}) => action.payload === _id);
       if (index >= 0) {
@@ -107,7 +108,7 @@ const AppSlice = createSlice({
         0,
       );
     },
-    decrementCartByID: (state, action: PayloadAction<number>) => {
+    decrementCartByID: (state, action: PayloadAction<string>) => {
       const cart = state.home.cart;
       const index = cart.findIndex(({_id}) => action.payload === _id);
       if (index >= 0) {

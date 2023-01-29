@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {
-  Alert,
   Image,
   SafeAreaView,
   ScrollView,
@@ -9,10 +8,13 @@ import {
   View,
 } from 'react-native';
 import PushNotification from 'react-native-push-notification';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {StackScreenProps} from '@react-navigation/stack';
 import {images} from 'assets';
 import {Button} from 'components';
+import {authSelectors} from 'containers/App/selector';
+import {resetCart} from 'containers/App/slice';
+import {orderService} from 'services';
 import {StackParams} from 'types';
 import {
   axios,
@@ -34,13 +36,15 @@ const CheckOutScreen: React.FC<Props> = ({navigation}) => {
   const goBack = () => navigation.goBack();
   const [loading, setLoading] = useState<boolean>(false);
   const {money, cart} = useSelector(homeSelectors);
+  const {user} = useSelector(authSelectors);
+  const dispatch = useDispatch();
   const [selectedOptionPayment, setSelectedOptionPayment] =
     useState<string>('');
 
   const handleCreateOrder = async () => {
     const payload = {
       payment_type_id: 2,
-      note: 'Tintest 123',
+      note: '',
       from_name: FROM_NAME,
       from_phone: FROM_PHONE,
       from_address: FROM_ADDRESS,
@@ -74,27 +78,42 @@ const CheckOutScreen: React.FC<Props> = ({navigation}) => {
       items: cart,
     };
     try {
-      const {data} = await axios.post(
-        'https://dev-online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/create',
-        payload,
-        {
-          headers: {
-            accept: 'application/json',
-            token: 'b545bc44-82dc-11ed-a2ce-1e68bf6263c5',
+      const data = await Promise.all([
+        axios.post(
+          'https://dev-online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/create',
+          payload,
+          {
+            headers: {
+              accept: 'application/json',
+              token: 'b545bc44-82dc-11ed-a2ce-1e68bf6263c5',
+            },
           },
-        },
-      );
-      if (data) {
+        ),
+        orderService.createOrder({
+          user_id: user._id,
+          full_name: user.name,
+          email: user.email,
+          phone_number: user.phone,
+          total_money: money,
+          address: user.address,
+          list_product: cart.map((item) => ({
+            name: item.name,
+            quantity: item.quantity,
+            price: item.price,
+          })),
+        }),
+      ]);
+      if (data[0].data) {
+        dispatch(resetCart());
         navigation.navigate('Congrats');
         PushNotification.localNotification({
           channelId: 'your-channel-id',
           ticker: 'Thông báo',
-          message: data.message_display,
+          message: data[0].data.message_display,
         });
-        // Alert.alert(data.message_display);
       }
     } catch (error) {
-      Alert.alert('Lỗi');
+      console.log(error);
     }
   };
 

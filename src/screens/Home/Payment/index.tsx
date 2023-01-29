@@ -4,7 +4,10 @@ import {Alert} from 'react-native';
 import PushNotification from 'react-native-push-notification';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import WebView from 'react-native-webview';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import {authSelectors} from 'containers/App/selector';
+import {resetCart} from 'containers/App/slice';
+import {orderService} from 'services';
 import {
   FROM_ADDRESS,
   FROM_DISTRICT_NAME,
@@ -17,10 +20,12 @@ import {homeSelectors} from '../selector';
 
 const Payment: React.FC = ({route, navigation}: any) => {
   const {money, cart} = useSelector(homeSelectors);
+  const {user} = useSelector(authSelectors);
+  const dispatch = useDispatch();
   const handleCreateOrder = async () => {
     const payload = {
       payment_type_id: 2,
-      note: 'Tintest 123',
+      note: '',
       from_name: FROM_NAME,
       from_phone: FROM_PHONE,
       from_address: FROM_ADDRESS,
@@ -46,7 +51,7 @@ const Payment: React.FC = ({route, navigation}: any) => {
       width: 19,
       height: 10,
       cod_amount: 0,
-      content: 'Theo New York Times',
+      content: 'Đặt hàng online qua app mobile',
       insurance_value: money,
       service_type_id: 2,
       coupon: null,
@@ -54,27 +59,43 @@ const Payment: React.FC = ({route, navigation}: any) => {
       items: cart,
     };
     try {
-      const {data} = await axios.post(
-        'https://dev-online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/create',
-        payload,
-        {
-          headers: {
-            accept: 'application/json',
-            token: 'b545bc44-82dc-11ed-a2ce-1e68bf6263c5',
+      const data = await Promise.all([
+        axios.post(
+          'https://dev-online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/create',
+          payload,
+          {
+            headers: {
+              accept: 'application/json',
+              token: 'b545bc44-82dc-11ed-a2ce-1e68bf6263c5',
+            },
           },
-        },
-      );
-      if (data) {
+        ),
+        orderService.createOrder({
+          user_id: user._id,
+          full_name: user.name,
+          email: user.email,
+          phone_number: user.phone,
+          total_money: money,
+          address: user.address,
+          list_product: cart.map((item) => ({
+            name: item.name,
+            quantity: item.quantity,
+            price: item.price,
+          })),
+          payment: 2,
+        }),
+      ]);
+      if (data[0].data) {
+        dispatch(resetCart());
         navigation.navigate('Congrats');
         PushNotification.localNotification({
           channelId: 'your-channel-id',
           ticker: 'Thông báo',
-          message: data.message_display,
+          message: data[0].data.message_display,
         });
-        // Alert.alert(data.message_display);
       }
     } catch (error) {
-      Alert.alert('Lỗi');
+      console.log(error);
     }
   };
   return (
@@ -85,7 +106,6 @@ const Payment: React.FC = ({route, navigation}: any) => {
           uri: route.params.link,
         }}
         onNavigationStateChange={async (navState: any) => {
-          console.log(1, navState);
           const {data} = await axios.get(navState.url);
           if (data.code === '00') {
             handleCreateOrder();

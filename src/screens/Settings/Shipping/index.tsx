@@ -57,7 +57,9 @@ const ShippingScreen: React.FC<Props> = ({navigation}) => {
         </View>
       </ScrollView>
       <View style={styles.footerView}>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate('AddressUserScreen')}>
           <Text style={styles.textButton}>+</Text>
         </TouchableOpacity>
       </View>

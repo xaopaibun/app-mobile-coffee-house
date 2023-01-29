@@ -1,11 +1,12 @@
 export interface ProductItem {
-  _id: number;
+  _id: string;
   name: string;
   price: number;
   content: string;
   category: string;
   length: number;
   width: number;
+  favorites: boolean;
   height: number;
   weight: number;
   image: Array<string>;
@@ -17,7 +18,7 @@ export interface ProductItem {
 }
 
 export interface CartItem {
-  _id: number;
+  _id: string;
   option: string;
   name: string;
   price: number;

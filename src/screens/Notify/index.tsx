@@ -68,13 +68,13 @@ const NotifyScreen: React.FC<Props> = () => {
             <Image source={images.search_setting} />
           </TouchableOpacity>
           <View>
-            <Text style={styles.subTitle}>Notification</Text>
+            <Text style={styles.subTitle}>Thông Báo</Text>
           </View>
           <View />
         </View>
         <View style={styles.notify_item}>
           <View style={styles.imageView}>
-            <Image source={images.product1} style={styles.image} />
+            <Image source={images.success_notification} style={styles.image} />
           </View>
           <View style={styles.content}>
             <Text style={styles.title}>
