@@ -49,5 +49,12 @@ class Home {
       params,
     });
   }
+
+  searchProduct(name: string): AxiosPromise<Array<ProductItem>> {
+    return this.axios({
+      method: 'GET',
+      url: `/product/list-products/search=${name}`,
+    });
+  }
 }
 export default Home;

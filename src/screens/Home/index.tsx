@@ -26,7 +26,7 @@ const HomeScreen: React.FC<Props> = ({navigation}) => {
 
   const {products, category, loading} = useSelector(homeSelectors);
 
-  const [idTab, setIDTab] = useState<string>('');
+  const [idTab, setIDTab] = useState<string>(category[0]?._id || '');
 
   const handleOnCart = () => navigation.navigate('CartScreen');
 
@@ -34,6 +34,8 @@ const HomeScreen: React.FC<Props> = ({navigation}) => {
     dispatch(getProductDetail(product));
     navigation.navigate('ProductScreen');
   };
+
+  const handleOnSearch = () => navigation.navigate('SearchScreen');
 
   useEffect(() => {
     Promise.all([
@@ -56,12 +58,12 @@ const HomeScreen: React.FC<Props> = ({navigation}) => {
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.containerView}>
         <View style={styles.header}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={handleOnSearch}>
             <Image source={images.search} style={styles.icon} />
           </TouchableOpacity>
           <View>
-            <Text style={styles.title}>Menu</Text>
-            <Text style={styles.subTitle}>Shop Đồ Câu Phạm Jin</Text>
+            {/* <Text style={styles.title}>Menu</Text> */}
+            <Text style={styles.subTitle}>Cửa Hàng Đồ Câu 24/7</Text>
           </View>
           <TouchableOpacity onPress={handleOnCart}>
             <Image source={images.cart} />
@@ -102,6 +104,7 @@ const HomeScreen: React.FC<Props> = ({navigation}) => {
           <FlatList
             data={products}
             numColumns={2}
+            showsVerticalScrollIndicator={false}
             renderItem={({item}) => (
               <TouchableOpacity
                 style={styles.itemProduct}

@@ -12,6 +12,7 @@ import {
 import {useDispatch, useSelector} from 'react-redux';
 import {StackScreenProps} from '@react-navigation/stack';
 import {images} from 'assets';
+import {Button} from 'components';
 import {
   decrementCartByID,
   increaseCartByID,
@@ -32,11 +33,11 @@ const CartScreen: React.FC<Props> = ({navigation}) => {
 
   const {cart, money} = useSelector(homeSelectors);
 
-  const handleDeleteCartByID = (id: number) => dispatch(removeCartByID(id));
+  const handleDeleteCartByID = (id: string) => dispatch(removeCartByID(id));
 
-  const handleIncrease = (id: number) => dispatch(increaseCartByID(id));
+  const handleIncrease = (id: string) => dispatch(increaseCartByID(id));
 
-  const handleDecrement = (id: number) => dispatch(decrementCartByID(id));
+  const handleDecrement = (id: string) => dispatch(decrementCartByID(id));
 
   return (
     <SafeAreaView style={styles.container}>
@@ -46,11 +47,22 @@ const CartScreen: React.FC<Props> = ({navigation}) => {
             <Image source={images.prev} />
           </TouchableOpacity>
           <View>
-            <Text style={styles.subTitle}>My Cart</Text>
+            <Text style={styles.subTitle}>Giỏ hàng của tôi</Text>
           </View>
           <View />
         </View>
         <FlatList
+          ListEmptyComponent={
+            <View>
+              <Image
+                source={{
+                  uri: 'https://krassvietnam.com/images/empty-cart.png',
+                }}
+                // eslint-disable-next-line react-native/no-inline-styles
+                style={{width: '100%', height: 380}}
+              />
+            </View>
+          }
           data={cart}
           numColumns={1}
           renderItem={({item}) => (
@@ -61,7 +73,7 @@ const CartScreen: React.FC<Props> = ({navigation}) => {
               <View style={styles.info}>
                 <Text style={styles.name}>{item.name}</Text>
                 <Text style={styles.price}>
-                  {Intl.NumberFormat().format(item.price)}
+                  {Intl.NumberFormat().format(item.price)} VND - {item.option}
                 </Text>
                 <View style={styles.flex}>
                   <TouchableOpacity
@@ -69,7 +81,7 @@ const CartScreen: React.FC<Props> = ({navigation}) => {
                     onPress={() => handleIncrease(item._id)}>
                     <Image source={images.add} />
                   </TouchableOpacity>
-                  <Text style={styles.number}>{item.quatity}</Text>
+                  <Text style={styles.number}>{item.quantity}</Text>
                   <TouchableOpacity
                     style={styles.btn_augment}
                     onPress={() => handleDecrement(item._id)}>
@@ -88,24 +100,31 @@ const CartScreen: React.FC<Props> = ({navigation}) => {
           keyExtractor={(item) => item._id.toString()}
         />
       </ScrollView>
-      <View style={[styles.flex_total, styles.promo]}>
+      {/* <View style={[styles.flex_total, styles.promo]}>
         <TextInput
-          placeholder="Enter your promo code"
+          placeholder="Vui lòng nhập mã giảm giá (nếu có)"
           style={styles.promo_code}
         />
         <TouchableOpacity style={styles.btnNext}>
           <Image source={images.next_while} />
         </TouchableOpacity>
-      </View>
+      </View> */}
       <View style={styles.flex_total}>
-        <Text style={styles.text_total}>Total:</Text>
+        <Text style={styles.text_total}>Tổng:</Text>
         <Text style={styles.total}>
           {Intl.NumberFormat().format(money)} VND
         </Text>
       </View>
-      <TouchableOpacity style={styles.btn} onPress={handleGoCheckOut}>
-        <Text style={styles.textBtn}>Check out</Text>
-      </TouchableOpacity>
+      {/* <TouchableOpacity style={styles.btn} onPress={handleGoCheckOut}>
+        <Text style={styles.textBtn}>Thanh toán</Text>
+      </TouchableOpacity> */}
+      <Button
+        label="Thanh toán"
+        onPress={handleGoCheckOut}
+        disabled={!cart.length}
+        containerStyle={styles.btn}
+        testID="btnSubmit"
+      />
     </SafeAreaView>
   );
 };

@@ -60,7 +60,7 @@ export default StyleSheet.create({
     lineHeight: 19,
     color: '#606060',
   },
-  wrap_price_quatity: {
+  wrap_price_quantity: {
     marginVertical: 16,
     flexDirection: 'row',
     alignItems: 'center',

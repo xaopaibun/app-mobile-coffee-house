@@ -15,10 +15,10 @@ class Auth {
     });
   }
 
-  signup(data: SignUpRequest): AxiosPromise<LoginResponse> {
+  register(data: SignUpRequest): AxiosPromise<LoginResponse> {
     return this.axios({
       method: 'POST',
-      url: '/auth/signup',
+      url: '/auth/register',
       data,
     });
   }

@@ -10,7 +10,9 @@ import CheckOutScreen from 'screens/Home/CheckOut';
 import CongratsScreen from 'screens/Home/Congrats';
 import Payment from 'screens/Home/Payment';
 import ProductScreen from 'screens/Home/Product';
+import SearchScreen from 'screens/Home/Search';
 import NotifyScreen from 'screens/Notify';
+import AddressUserScreen from 'screens/Settings/Address';
 import MyOrderScreen from 'screens/Settings/Order';
 import PaymentScreen from 'screens/Settings/Payment';
 import ProfileScreen from 'screens/Settings/Profile';
@@ -59,6 +61,11 @@ const SetttingsStack = () => {
       <Stack.Screen
         name="SettingScreen"
         component={SettingScreen}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="AddressUserScreen"
+        component={AddressUserScreen}
         options={{headerShown: false}}
       />
     </Stack.Navigator>
@@ -151,6 +158,11 @@ const PrivateNavigation = () => {
       <Stack.Screen
         name="Payment"
         component={Payment}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="SearchScreen"
+        component={SearchScreen}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

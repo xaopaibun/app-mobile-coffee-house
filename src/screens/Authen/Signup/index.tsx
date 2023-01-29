@@ -1,13 +1,20 @@
 import {Formik} from 'formik';
 import React, {useCallback, useState} from 'react';
-import {Image, View, Text, SafeAreaView, TouchableOpacity} from 'react-native';
+import {
+  Image,
+  View,
+  Text,
+  SafeAreaView,
+  TouchableOpacity,
+  Alert,
+} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {StackScreenProps} from '@react-navigation/stack';
 import {images} from 'assets';
 import {Input, Button} from 'components';
-import {LoginRequest, StackParams, AppDispatch, SignUpRequest} from 'types';
+import {StackParams, AppDispatch, SignUpRequest} from 'types';
 import styles from './styles';
-import {login} from './thunk';
+import {signup} from './thunk';
 import validationSchema from './validationSchema';
 
 type Props = StackScreenProps<StackParams, 'SignUp'>;
@@ -15,14 +22,20 @@ type Props = StackScreenProps<StackParams, 'SignUp'>;
 const SignupScreen: React.FC<Props> = ({navigation}) => {
   const dispatch = useDispatch<AppDispatch>();
   const [loading, setLoading] = useState<boolean>(false);
-
+  const [error, setError] = useState<string>('');
   const handleOnSubmit = useCallback(
-    async (values: LoginRequest) => {
+    async (values: SignUpRequest) => {
       setLoading(true);
-      const actionResult = await dispatch(login(values));
-      if (login.fulfilled.match(actionResult)) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const {confirm_password, ...value} = values;
+      const actionResult = await dispatch(signup(value));
+      if (signup.fulfilled.match(actionResult)) {
         setLoading(false);
-        navigation.navigate('Home');
+        Alert.alert('Đăng ký tài khoản thành công!');
+        navigation.navigate('Login');
+      } else {
+        setError(actionResult.payload.response?.data?.message || '');
+        setLoading(false);
       }
     },
     [dispatch, navigation],
@@ -40,27 +53,25 @@ const SignupScreen: React.FC<Props> = ({navigation}) => {
           <Image source={images.icon_login} />
           <View style={styles.borderLogin} />
         </View>
-        <Text style={styles.subTitle}>WELCOME</Text>
-        <Formik
-          onSubmit={handleOnSubmit}
-          initialValues={initialValues}
-          validationSchema={validationSchema}>
+        <Text style={styles.subTitle}>Xin chào</Text>
+        <Formik onSubmit={handleOnSubmit} initialValues={initialValues}>
           {({handleSubmit}) => (
             <View style={styles.content}>
-              <Text style={styles.label}>Name</Text>
+              <Text style={styles.label}>Họ tên: </Text>
               <Input name="name" style={styles.input} />
-              <Text style={styles.label}>Email</Text>
+              <Text style={styles.label}>Email: </Text>
               <Input name="email" style={styles.input} />
-              <Text style={styles.label}>Password</Text>
+              <Text style={styles.label}>Mật khẩu: </Text>
               <Input name="password" secureTextEntry style={styles.input} />
-              <Text style={styles.label}>Confirm Password</Text>
+              <Text style={styles.label}>Xác nhận mật khẩu: </Text>
               <Input
                 name="confirm_password"
                 secureTextEntry
                 style={styles.input}
               />
+              <Text style={{color: 'red'}}>{error}</Text>
               <Button
-                label="SIGN UP"
+                label="Đăng ký tài khoản"
                 onPress={handleSubmit}
                 isLoading={loading}
                 disabled={loading}
@@ -68,9 +79,9 @@ const SignupScreen: React.FC<Props> = ({navigation}) => {
                 testID="btnSubmit"
               />
               <View style={styles.flexText}>
-                <Text style={styles.labelAlready}>Already have account? </Text>
+                <Text style={styles.labelAlready}>Bạn đã có tài khoản? </Text>
                 <TouchableOpacity onPress={handleOnSignIn}>
-                  <Text style={styles.labelSignIn}>SIGN IN</Text>
+                  <Text style={styles.labelSignIn}>Đăng nhập nào</Text>
                 </TouchableOpacity>
               </View>
             </View>
@@ -82,10 +93,10 @@ const SignupScreen: React.FC<Props> = ({navigation}) => {
 };
 
 const initialValues: SignUpRequest = {
-  email: '',
-  name: '',
-  password: '',
-  confirm_password: '',
+  email: 'quy@gmail.com',
+  name: 'quy',
+  password: 'a12345678',
+  confirm_password: 'a12345678',
 };
 
 export default SignupScreen;

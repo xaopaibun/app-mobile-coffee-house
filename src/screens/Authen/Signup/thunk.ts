@@ -10,7 +10,7 @@ export const login = createAsyncThunk<
 >('login/login', async (params, {rejectWithValue}) => {
   try {
     const {data} = await authService.login(params);
-    await setToken(data.auth_token);
+    await setToken(data.tokens.access.token);
     return data;
   } catch (err) {
     return rejectWithValue(err);
@@ -19,12 +19,12 @@ export const login = createAsyncThunk<
 
 export const signup = createAsyncThunk<
   TYPE.LoginResponse,
-  TYPE.LoginRequest,
+  TYPE.SignUpRequest,
   TYPE.ThunkAPI<TYPE.ResponseError>
 >('login/signup', async (params, {rejectWithValue}) => {
   try {
-    const {data} = await authService.login(params);
-    await setToken(data.auth_token);
+    const {data} = await authService.register(params);
+    await setToken(data.tokens.access.token);
     return data;
   } catch (err) {
     return rejectWithValue(err);

@@ -99,7 +99,6 @@ export default StyleSheet.create<Props>({
     paddingVertical: 10,
   },
   textStatus: {
-    color: '#27AE60',
     fontWeight: '600',
     fontSize: 16,
   },
